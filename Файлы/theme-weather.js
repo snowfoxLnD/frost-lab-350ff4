@@ -20,10 +20,10 @@ const THEMES={
     grad:'radial-gradient(60% 50% at 20% 0%,rgba(209,92,29,.26),transparent 60%),radial-gradient(70% 60% at 50% 110%,rgba(155,114,82,.24),transparent 60%),linear-gradient(180deg,#0e0b10,#131015 45%,#1a1411)'},
   autumnDay:{mode:'dark',bg:'#1a1410',card:'rgba(38,28,20,.74)',ice:'#ffd089',icdim:'#ed9e51',cop:'#d88a5a',txt:'#f4e2c8',mut:'#b09478',bdr:'rgba(255,208,137,.16)',
     grad:'radial-gradient(60% 50% at 20% 0%,rgba(242,167,45,.3),transparent 60%),radial-gradient(70% 60% at 50% 110%,rgba(209,92,29,.2),transparent 60%),linear-gradient(180deg,#140f0b,#1a1410 45%,#20180f)'},
-  springNight:{mode:'dark',bg:'#160f14',card:'rgba(34,22,28,.74)',ice:'#e8aaa4',icdim:'#a56368',cop:'#9ab0a6',txt:'#eddde0',mut:'#a88e94',bdr:'rgba(232,170,164,.15)',
-    grad:'radial-gradient(60% 50% at 20% 0%,rgba(155,94,97,.3),transparent 60%),radial-gradient(70% 60% at 50% 110%,rgba(86,127,117,.2),transparent 60%),linear-gradient(180deg,#110c0f,#160f14 45%,#1d141a)'},
-  springDay:{mode:'dark',bg:'#1a1218',card:'rgba(40,26,34,.72)',ice:'#f0b5af',icdim:'#be6a63',cop:'#a6bcb0',txt:'#f2e2e4',mut:'#b29aa0',bdr:'rgba(240,181,175,.16)',
-    grad:'radial-gradient(60% 50% at 20% 0%,rgba(227,160,154,.28),transparent 60%),radial-gradient(70% 60% at 50% 110%,rgba(150,176,166,.22),transparent 60%),linear-gradient(180deg,#150e13,#1a1218 45%,#21161e)'},
+  springNight:{mode:'dark',bg:'#241a26',card:'rgba(52,36,48,.72)',ice:'#f0b8c4',icdim:'#c97f9a',cop:'#a9c2a8',txt:'#f4e6ec',mut:'#bba0b0',bdr:'rgba(240,184,196,.18)',
+    grad:'radial-gradient(60% 50% at 20% 0%,rgba(201,127,154,.34),transparent 60%),radial-gradient(70% 60% at 50% 110%,rgba(120,160,140,.26),transparent 60%),linear-gradient(180deg,#1c1420,#241a26 45%,#2c2030)'},
+  springDay:{mode:'dark',bg:'#2a2030',card:'rgba(58,42,56,.7)',ice:'#f6c8d2',icdim:'#d68fa8',cop:'#b2cbb0',txt:'#f7ebf0',mut:'#c4abba',bdr:'rgba(246,200,210,.18)',
+    grad:'radial-gradient(60% 50% at 20% 0%,rgba(227,160,180,.3),transparent 60%),radial-gradient(70% 60% at 50% 110%,rgba(150,180,160,.26),transparent 60%),linear-gradient(180deg,#221a28,#2a2030 45%,#322638)'},
 };
 const SEASONS=[['winter','❄ Зима'],['spring','🌸 Весна'],['summer','☀ Лето'],['autumn','🍁 Осень']];
 
@@ -32,6 +32,31 @@ const css=`
 body[data-theme]::before{background:var(--grad)!important;}
 /* top nav follows theme tint */
 body[data-theme] #main-nav{background:color-mix(in srgb,var(--bg) 92%,transparent)!important;border-bottom-color:var(--bdr)!important;}
+/* === перекраска компонентов под тему (НЕ трогаем WU и Мифы) === */
+body[data-theme] .nav-logo{color:var(--ice)!important;}
+body[data-theme] .nav-logo-img{filter:drop-shadow(0 0 8px color-mix(in srgb,var(--ice) 45%,transparent))!important;}
+/* карточки историй/пациента */
+body[data-theme] .story-card,body[data-theme] .pcard,body[data-theme] .ccard,body[data-theme] [class*="card-frame"]{background:var(--card)!important;border-color:var(--bdr)!important;}
+/* поиск */
+body[data-theme] .search-box,body[data-theme] #search-input,body[data-theme] [class*="search"]{background:color-mix(in srgb,var(--bg) 70%,transparent)!important;border-color:var(--bdr)!important;}
+/* досье: все панели */
+body[data-theme] .ds-card,body[data-theme] .ds-zayne,body[data-theme] .ds-rx,body[data-theme] .ds-ach,body[data-theme] .ds-accat,body[data-theme] .ds-io,body[data-theme] .ds-tools .ds-tbtn,body[data-theme] .ds-ach .ds-ic{background:var(--card)!important;}
+body[data-theme] .ds-card,body[data-theme] .ds-zayne,body[data-theme] .ds-rx,body[data-theme] .ds-ach,body[data-theme] .ds-accat,body[data-theme] .ds-io{border-color:var(--bdr)!important;}
+/* каналы внизу — общий блок (если не wu/myth) */
+body[data-theme] .ch-bar{background:var(--card)!important;border-color:var(--bdr)!important;}
+
+/* === ИСКЛЮЧЕНИЕ: на вкладках WU и Мифы вернуть ОРИГИНАЛЬНЫЙ фон === */
+body[data-tab="wu"]::before,body[data-tab="myths"]::before{
+  background:radial-gradient(60% 50% at 20% 0%,rgba(42,108,176,.2),transparent 60%),radial-gradient(70% 60% at 50% 110%,rgba(74,138,176,.16),transparent 60%),linear-gradient(180deg,#040912,#060e1a 45%,#08182b)!important;}
+body[data-tab="wu"] #main-nav,body[data-tab="myths"] #main-nav{background:rgba(6,14,26,.94)!important;}
+/* и не перекрашивать сами панели WU/Мифов (на всякий случай — они со своими классами, мы их и не трогаем) */
+
+/* === МАСШТАБ === */
+#zoomCtl{position:fixed;right:14px;bottom:16px;z-index:210;display:flex;flex-direction:column;gap:6px;}
+#zoomCtl button{width:36px;height:36px;border-radius:50%;border:1px solid var(--bdr);background:rgba(6,14,26,.9);color:var(--ice);font-family:'JetBrains Mono',monospace;font-size:.9rem;cursor:pointer;transition:.25s;box-shadow:0 2px 10px rgba(0,0,0,.4);}
+#zoomCtl button:hover{border-color:var(--ice);box-shadow:0 0 12px color-mix(in srgb,var(--ice) 30%,transparent);}
+@media(max-width:980px){#zoomCtl{right:10px;bottom:12px;}#zoomCtl button{width:34px;height:34px;}}
+
 body.theme-light h1,body.theme-light .site-title,body.theme-light .ds-h-title,body.theme-light .hero-title{text-shadow:0 0 18px color-mix(in srgb,var(--ice) 18%,transparent)!important;}
 body.theme-light{color-scheme:light;}
 /* nav theme toggle */
@@ -189,4 +214,39 @@ applyTheme();
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
 // re-mount if dossier built later / nav re-rendered
 setTimeout(mount,600);setTimeout(mount,1600);
+
+/* ── tab tracking (для исключения WU/Мифов из перекраски) ── */
+function tagTab(t){document.body.setAttribute('data-tab',t||'all');}
+(function(){
+  function hook(){
+    if(window.__aksoTabHook)return;
+    if(typeof window.navGo==='function'){
+      const o=window.navGo;window.navGo=function(section,btn){tagTab(section);return o.apply(this,arguments);};window.__aksoTabHook=1;
+    }
+    if(typeof window.switchTab==='function'){
+      const s=window.switchTab;window.switchTab=function(tab,btn){tagTab(tab);return s.apply(this,arguments);};
+    }
+  }
+  hook();setTimeout(hook,400);setTimeout(hook,1200);
+  tagTab('all');
+})();
+
+/* ── масштаб A- / A+ ── */
+(function(){
+  let z=1;try{z=parseFloat(localStorage.getItem('akso_zoom')||'1')||1;}catch(e){}
+  function applyZoom(){document.documentElement.style.fontSize=(z*100)+'%';}
+  function setZoom(v){z=Math.min(1.4,Math.max(0.8,Math.round(v*20)/20));try{localStorage.setItem('akso_zoom',z);}catch(e){}applyZoom();}
+  function build(){
+    if(document.getElementById('zoomCtl'))return;
+    const w=document.createElement('div');w.id='zoomCtl';
+    w.innerHTML='<button title="Крупнее" id="zPlus">A+</button><button title="Мельче" id="zMinus">A−</button>';
+    document.body.appendChild(w);
+    w.querySelector('#zPlus').onclick=()=>setZoom(z+0.05);
+    w.querySelector('#zMinus').onclick=()=>setZoom(z-0.05);
+  }
+  applyZoom();
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);else build();
+  setTimeout(build,600);
+})();
+
 })();
