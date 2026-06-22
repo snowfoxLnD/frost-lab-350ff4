@@ -30,11 +30,14 @@ const SEASONS=[['winter','❄ Зима'],['spring','🌸 Весна'],['summer',
 /* ---------- CSS ---------- */
 const css=`
 body[data-theme]::before{background:var(--grad)!important;}
+/* top nav follows theme tint */
+body[data-theme] #main-nav{background:color-mix(in srgb,var(--bg) 92%,transparent)!important;border-bottom-color:var(--bdr)!important;}
 body.theme-light h1,body.theme-light .site-title,body.theme-light .ds-h-title,body.theme-light .hero-title{text-shadow:0 0 18px color-mix(in srgb,var(--ice) 18%,transparent)!important;}
 body.theme-light{color-scheme:light;}
 /* nav theme toggle */
-#themeToggle{margin-left:6px;flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:.95rem;line-height:1;color:var(--ice);background:rgba(255,255,255,.05);border:1px solid var(--bdr);border-radius:50%;width:34px;height:34px;cursor:pointer;transition:.3s;display:flex;align-items:center;justify-content:center;}
-#themeToggle:hover{border-color:var(--ice);box-shadow:0 0 12px color-mix(in srgb,var(--ice) 30%,transparent);}
+#themeToggle{position:fixed;top:10px;right:14px;z-index:210;font-family:'JetBrains Mono',monospace;font-size:1rem;line-height:1;color:var(--ice);background:rgba(6,14,26,.9);border:1px solid var(--bdr);border-radius:50%;width:36px;height:36px;cursor:pointer;transition:.3s;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.4);}
+#themeToggle:hover{border-color:var(--ice);box-shadow:0 0 14px color-mix(in srgb,var(--ice) 35%,transparent);}
+@media(max-width:980px){#themeToggle{top:8px;right:10px;width:32px;height:32px;font-size:.9rem;}}
 /* season selector in dossier */
 .ds-season{display:flex;gap:8px;flex-wrap:wrap;align-items:center;border:1px solid var(--bdr);background:rgba(0,0,0,.12);padding:12px 14px;margin-bottom:18px;}
 .ds-season .lbl{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--icdim);width:100%;}
@@ -160,11 +163,10 @@ function renderWeather(){
 
 /* ---------- МОНТАЖ ЭЛЕМЕНТОВ ---------- */
 function mount(){
-  // 1) toggle on nav — put into nav-menu so it shows on mobile too
-  const navMenu=document.querySelector('.nav-menu');
-  if(navMenu&&!document.getElementById('themeToggle')){
+  // 1) floating day/night toggle (fixed, does not affect nav layout)
+  if(!document.getElementById('themeToggle')){
     const b=document.createElement('button');b.id='themeToggle';b.title='День / ночь';b.onclick=toggleMode;
-    navMenu.appendChild(b);
+    document.body.appendChild(b);
   }
   // 2) season selector + weather widget in dossier
   const wrap=document.querySelector('#tab-dossier .ds-wrap');
