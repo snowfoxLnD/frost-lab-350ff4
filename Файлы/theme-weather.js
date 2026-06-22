@@ -55,8 +55,10 @@ body[data-theme] .ds-rx-body{color:#16242f!important;}
 body[data-theme] .ds-rx-roll{color:#2f6f93!important;border-color:rgba(47,111,147,.4)!important;}
 body[data-theme] .ds-rx-roll:hover{background:rgba(47,111,147,.08)!important;}
 body[data-theme] .ds-rx-sig{color:#2f6f93!important;}
-/* Зейн-реплика (ds-zayne пузырь) тоже была светлой бумагой — оставим читаемой */
-body[data-theme] .ds-zayne .ds-z-bubble,body[data-theme] .ds-zbubble{color:inherit;}
+/* Зейн-реплика: ледяной пузырь в цветах Аксо (как рецепт) */
+body[data-theme] .ds-zb{background:linear-gradient(160deg,#eef6fc,#dcebf6)!important;color:#16242f!important;}
+body[data-theme] .ds-zb::before{border-right-color:#dcebf6!important;}
+body[data-theme] .ds-zsig{color:#2f6f93!important;}
 
 /* === Текст карточек: ярче и в палитре === */
 body[data-theme] .mc-diag{color:color-mix(in srgb,var(--txt) 88%,transparent)!important;}
