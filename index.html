@@ -20,9 +20,7 @@
 <meta name="twitter:image" content="https://snowfoxlnd.github.io/akso-archive/./%D0%A4%D0%B0%D0%B9%D0%BB%D1%8B/%D0%90%D0%BA%D1%81%D0%BE%20%D0%BB%D0%BE%D0%B3%D0%BE%20(%D0%BD%D1%83%D0%B6%D0%BD%D0%BE%D0%B5).png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Allura&family=Audiowide&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-<link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/audiowide/v20/l7gdbjpo0cum0ckerWCdlg_O.woff2" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Raleway:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Chakra+Petch:wght@500;600;700&family=Cinzel:wght@500;600&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
 <style>
 @font-face{font-family:'FHWA';src:url('./%D0%A4%D0%B0%D0%B9%D0%BB%D1%8B/FHWASeriesEM_Rg.ttf') format('truetype');}
@@ -106,14 +104,13 @@ body::after{content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;opa
 /* title */
 #title-scr{background:var(--bg);}
 .title-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 50%,rgba(74,138,176,.1)0%,transparent 68%);pointer-events:none;}
-.fonts-ready .site-big{opacity:1;}
-.site-big{font-family:'Audiowide',cursive;font-weight:400;opacity:0;transition:opacity .25s;font-size:clamp(2.2rem,8vw,6rem);letter-spacing:.06em;color:#eaf3f9;line-height:1.1;text-shadow:0 0 70px rgba(168,216,240,.2);text-align:center;animation:fadeUp 1s ease both;position:relative;}
+.site-big{font-family:'Orbitron',monospace;font-weight:900;font-size:clamp(2.2rem,8vw,6rem);letter-spacing:.06em;color:#eaf3f9;line-height:1.1;text-shadow:0 0 70px rgba(168,216,240,.2);text-align:center;animation:fadeUp 1s ease both;position:relative;}
 .site-big::before,.site-big::after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;text-align:center;pointer-events:none;opacity:.0;}
 .site-big::before{color:#ff3b4e;animation:glitchA 5.5s steps(1) infinite;}
 .site-big::after{color:#46d0ff;animation:glitchB 5.5s steps(1) infinite;}
 @keyframes glitchA{0%,92%,100%{opacity:0;transform:none}93%{opacity:.7;transform:translate(-3px,1px)}95%{opacity:.6;transform:translate(2px,-1px)}97%{opacity:0}}
 @keyframes glitchB{0%,92%,100%{opacity:0;transform:none}94%{opacity:.7;transform:translate(3px,-1px)}96%{opacity:.6;transform:translate(-2px,1px)}98%{opacity:0}}
-.site-tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.88rem,1.8vw,1.1rem);color:#c8dcec;text-align:center;margin-top:16px;animation:fadeUp 1s .3s ease both;}
+.site-tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.88rem,1.8vw,1.1rem);color:var(--mut);text-align:center;margin-top:16px;animation:fadeUp 1s .3s ease both;}
 .title-btns{display:flex;gap:12px;margin-top:44px;flex-wrap:wrap;justify-content:center;animation:fadeUp 1s .6s ease both;}
 .title-btn{font-family:'Raleway',sans-serif;font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ice);background:rgba(74,138,176,.08);border:1px solid rgba(74,138,176,.38);padding:13px 36px;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block;}
 .title-btn:hover{background:rgba(74,138,176,.2);border-color:var(--ice);}
@@ -218,7 +215,7 @@ body::after{content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;opa
 .mc-rarity .tag.tg-wu{color:#4acce0;border-color:rgba(74,200,224,.3);}
 .mc-rarity .tag.tg-myth{color:#a080e0;border-color:rgba(160,128,224,.3);}
 .mc-rarity .tag.tg-meta{color:var(--cop);border-color:rgba(196,154,108,.3);}
-.mc-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;color:#ffffff;line-height:1.25;margin-bottom:6px;}
+.mc-title{font-family:'Cormorant Garamond',serif;font-size:1.32rem;font-weight:500;color:#eaf3f9;line-height:1.25;margin-bottom:6px;}
 .mc-diag{font-size:.74rem;line-height:1.65;color:var(--mut);
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
 .mc-diag .k{font-family:var(--mono);font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:var(--icdim);display:block;margin-bottom:3px;}
@@ -555,6 +552,7 @@ button.nav-link{background:none;border:none;cursor:pointer;font-weight:700;lette
 .ds-ach.unlocked[data-r="leg"]{box-shadow:0 0 18px rgba(255,94,116,.14);}
 .ds-ach .ds-ic{flex-shrink:0;width:44px;height:44px;border:1px solid var(--bdr);display:flex;align-items:center;justify-content:center;font-size:1.3rem;background:rgba(6,12,22,.5);}
 .ds-ic-em{font-size:1.3rem;line-height:1;}
+.ds-ic-img,.ds-toast .tic .ds-ic-img{width:38px;height:38px;object-fit:contain;image-rendering:pixelated;image-rendering:crisp-edges;display:block;}
 .ds-ach .ds-ab{flex:1;min-width:0;}
 .ds-ach .ds-an{font-family:'Orbitron',monospace;font-size:.62rem;letter-spacing:.04em;color:#eaf3f9;line-height:1.3;}
 .ds-ach .ds-ad{font-size:.68rem;color:var(--mut);line-height:1.4;margin-top:4px;}
@@ -693,17 +691,6 @@ body.day{--bg:#cfe0ee;--card:rgba(255,255,255,.82);--txt:#1a2a3a;--mut:#4a6882;-
 .ds-accat.closed .ds-accat-body{max-height:0;opacity:0;padding-top:0;padding-bottom:0;}
 
 </style>
-
-<script>
-(function(){
-  function ready(){document.documentElement.classList.add('fonts-ready');}
-  if(document.fonts&&document.fonts.ready){
-    document.fonts.load('1em "Audiowide"').then(ready).catch(ready);
-    document.fonts.ready.then(ready);
-  }else{setTimeout(ready,300);}
-  setTimeout(ready,800); // fallback if network is slow
-})();
-</script>
 </head>
 <body>
 
@@ -754,10 +741,11 @@ body.day{--bg:#cfe0ee;--card:rgba(255,255,255,.82);--txt:#1a2a3a;--mut:#4a6882;-
 <!-- TITLE -->
 <div class="screen" id="title-scr">
   <div class="title-glow"></div>
-  <div class="site-big" data-text="ARCHIVE AKSO">ARCHIVE AKSO</div>
+  <div class="site-big" data-text="Архив Аксо">Архив Аксо</div>
   <div class="site-tag">Создано Лисёнком Доктора Ноа — для Жасминок и не только</div>
   <div class="title-btns">
     <button class="title-btn" onclick="enterSite()">Перейти в архив →</button>
+    <a class="title-btn tg" href="https://t.me/snowfox_lnd" target="_blank">↗ Telegram-канал</a>
   </div>
 </div>
 
@@ -1291,7 +1279,6 @@ function openCard(i){
     if(!DS.read.includes(i)){DS.read.push(i);}
     if(!DS.readDates[c.title]){DS.readDates[c.title]=new Date().toISOString();}
     dsSave();
-    if(c.type==='4')dsUnlock('cards4');
     if(c.type==='5'){
       const all5=CARDS.map((x,idx)=>({x,idx})).filter(o=>o.x.type==='5');
       if(all5.every(o=>DS.read.includes(o.idx)))dsUnlock('cards5');
@@ -1632,35 +1619,37 @@ function accessRank(u,tot){
 /* Категории ачивок */
 const ACH_CATS=[
   {cat:'Исследование', ids:['visit','myths','under','channels']},
-  {cat:'Коллекция',    ids:['cards5','cards4','rx']},
+  {cat:'Коллекция',    ids:['cards5','rx']},
   {cat:'Секреты',      ids:['freeze','silence','insomnia','fullset']},
   {cat:'Лор',          ids:['zayne10','name','photo']},
   {cat:'Сезонные',     ids:['bday','aurora','night']},
 ];
 
 
+const ACH_IMG='./Файлы/achievements/';
 const ACH=[
-  {id:'visit', e:'🚪', n:'Первый визит',          d:'Войти в Архив Аксо.',                          r:'blue'},
-  {id:'cards5', e:'🩺', n:'Полный осмотр',         d:'Прочитать все 5★ карточки.',                   r:'jade'},
-  {id:'cards4', e:'🎴', n:'Боевой паёк',           d:'Прочитать 4★ карточки.',                       r:'blue'},
-  {id:'myths', e:'⛩️', n:'Хранитель мифов',       d:'Открыть оба мифа.',                            r:'jade'},
-  {id:'under', e:'🕳️', n:'Спуск в подземелье',    d:'Побывать в World Underneath.',                 r:'blue'},
-  {id:'freeze', e:'❄️', n:'Криокамера',            d:'Активировать секретное слово в поиске.',       r:'gold'},
-  {id:'aurora', e:'🌌', n:'Северное сияние',       d:'Поймать редкий день авроры.',                  r:'gold'},
-  {id:'night', e:'🌙', n:'Ночная смена',          d:'Зайти после полуночи.',                        r:'blue'},
-  {id:'name', e:'🪪', n:'Опознан',               d:'Ввести имя в досье.',                          r:'blue'},
-  {id:'photo', e:'📸', n:'Карта пациента',        d:'Загрузить фото в досье.',                      r:'blue'},
-  {id:'rx', e:'💊', n:'По рецепту',            d:'Сгенерировать 5 рецептов.',                    r:'jade'},
-  {id:'zayne10', e:'💬', n:'Беседа с доктором',     d:'10 ответов от Dr. Zayne.',                     r:'jade'},
-  {id:'channels', e:'📡', n:'Знакомый круг',        d:'Открыть все каналы из подвала.',               r:'blue'},
-  {id:'bday', e:'🎂', n:'С днём рождения, доктор', d:'Зайти 5 сентября.',                            r:'diamond', secret:true},
-  {id:'silence', e:'🤫', n:'Тишина',                d:'Прошептать «Silence».',                        r:'diamond', secret:true},
-  {id:'insomnia', e:'🕯️', n:'Бессонница хирурга',   d:'Зайти между 02:00 и 04:00.',                   r:'gold', secret:true},
-  {id:'fullset', e:'👑', n:'Полный допуск',         d:'Открыть все остальные допуски.',               r:'diamond'},
+  {id:'visit',    e:'🚪', img:ACH_IMG+'visit.png',    n:'Первый визит',          d:'Войти в Архив Аксо.',                          r:'blue'},
+  {id:'cards5',   e:'🩺', img:ACH_IMG+'cards5.png',   n:'Полный осмотр',         d:'Прочитать все 5★ карточки.',                   r:'jade'},
+  {id:'myths',    e:'⛩️', img:ACH_IMG+'myths.png',    n:'Хранитель мифов',       d:'Открыть оба мифа.',                            r:'jade'},
+  {id:'under',    e:'🕳️', img:ACH_IMG+'under.png',    n:'Спуск в подземелье',    d:'Побывать в World Underneath.',                 r:'blue'},
+  {id:'freeze',   e:'❄️', img:ACH_IMG+'freeze.png',   n:'Криокамера',            d:'Активировать секретное слово в поиске.',       r:'gold'},
+  {id:'aurora',   e:'🌌', img:ACH_IMG+'aurora.png',   n:'Северное сияние',       d:'Поймать редкий день авроры.',                  r:'gold'},
+  {id:'night',    e:'🌙', img:ACH_IMG+'night.png',    n:'Ночная смена',          d:'Зайти после полуночи.',                        r:'blue'},
+  {id:'name',     e:'🪪', img:ACH_IMG+'name.png',     n:'Опознан',               d:'Ввести имя в досье.',                          r:'blue'},
+  {id:'photo',    e:'📸', img:ACH_IMG+'photo.png',    n:'Карта пациента',        d:'Загрузить фото в досье.',                      r:'blue'},
+  {id:'rx',       e:'💊', img:ACH_IMG+'rx.png',       n:'По рецепту',            d:'Сгенерировать 5 рецептов.',                    r:'jade'},
+  {id:'zayne10',  e:'💬', img:ACH_IMG+'zayne10.png',  n:'Беседа с доктором',     d:'10 ответов от Dr. Zayne.',                     r:'jade'},
+  {id:'channels', e:'📡', img:ACH_IMG+'channels.png', n:'Знакомый круг',         d:'Открыть все каналы из подвала.',               r:'blue'},
+  {id:'bday',     e:'🎂', img:ACH_IMG+'bday.png',     n:'С днём рождения, доктор', d:'Зайти 5 сентября.',                          r:'diamond', secret:true},
+  {id:'silence',  e:'🤫', img:ACH_IMG+'silence.png',  n:'Тишина',                d:'Прошептать «Silence».',                        r:'diamond', secret:true},
+  {id:'insomnia', e:'🕯️', img:ACH_IMG+'insomnia.png', n:'Бессонница хирурга',    d:'Зайти между 02:00 и 04:00.',                   r:'gold', secret:true},
+  {id:'fullset',  e:'👑', img:ACH_IMG+'fullset.png',  n:'Полный допуск',         d:'Открыть все остальные допуски.',               r:'diamond'},
 ];
 
 let DS={u:[],name:'',photo:'',visits:0,id:null,rxRolls:0,zayneCount:0,globeShakes:0,channelsClicked:[],read:[]};
 try{const s=JSON.parse(localStorage.getItem('akso_dossier')||'null');if(s)DS=Object.assign(DS,s);}catch(e){}
+// drop legacy achievement ids no longer in ACH (e.g. cards4)
+if(Array.isArray(DS.u))DS.u=DS.u.filter(id=>ACH.some(a=>a.id===id));
 DS.visits=(DS.visits||0)+1;
 if(!DS.id)DS.id='AH-'+String(Math.floor(1000+Math.random()*8999));
 function dsSave(){try{localStorage.setItem('akso_dossier',JSON.stringify(DS));}catch(e){}}
@@ -1676,7 +1665,8 @@ function dsUnlock(id,silent){
 function dsToast(a){
   const wrap=document.getElementById('ds-toasts');if(!wrap)return;
   const el=document.createElement('div');el.className='ds-toast';el.dataset.r=a.r;
-  el.innerHTML=`<div class="tic"><span class="ds-ic-em">${a.e||'★'}</span></div><div><div class="th">Допуск получен · ${R_LABEL[a.r]}</div><div class="tn">${a.n}</div></div>`;
+  const ic=a.img?`<img class="ds-ic-img" src="${a.img}" alt="" onerror="this.outerHTML='&lt;span class=&quot;ds-ic-em&quot;&gt;${a.e||'★'}&lt;/span&gt;'">`:`<span class="ds-ic-em">${a.e||'★'}</span>`;
+  el.innerHTML=`<div class="tic">${ic}</div><div><div class="th">Допуск получен · ${R_LABEL[a.r]}</div><div class="tn">${a.n}</div></div>`;
   wrap.appendChild(el);dsChime(a.r);setTimeout(()=>el.remove(),4300);
 }
 
@@ -1684,8 +1674,9 @@ function dsRender(){
   const grid=document.getElementById('ds-ach');if(!grid)return;
   const byId={};ACH.forEach(a=>byId[a.id]=a);
   const achCard=a=>{const un=dsUn(a.id),sec=a.secret&&!un;
+    const ic=sec?'<span class="ds-ic-em">❔</span>':(a.img?`<img class="ds-ic-img" src="${a.img}" alt="" loading="lazy" onerror="this.outerHTML='&lt;span class=&quot;ds-ic-em&quot;&gt;${a.e||'★'}&lt;/span&gt;'">`:`<span class="ds-ic-em">${a.e||'★'}</span>`);
     return `<div class="ds-ach ${un?'unlocked':'locked'} ${a.secret?'secret':''}" data-r="${a.r}">
-      <div class="ds-ic"><span class="ds-ic-em">${sec?'❔':(a.e||'★')}</span></div>
+      <div class="ds-ic">${ic}</div>
       <div class="ds-ab"><div class="ds-an">${sec?'Секретный допуск':a.n}</div><div class="ds-ad">${sec?'Условие скрыто.':a.d}</div><div class="ds-ar">${R_LABEL[a.r]}</div></div>
       ${un?'<span class="ds-got">✓</span>':''}</div>`;};
   grid.innerHTML='';
@@ -2046,6 +2037,5 @@ if(document.getElementById('site')&&document.getElementById('site').classList.co
 <audio id="silenceAudio" src="./Файлы/silence.mp3" preload="none"></audio>
 
 <script src="./Файлы/card-drop.js"></script>
-<script src="./Файлы/theme-weather.js"></script>
 </body>
 </html>
