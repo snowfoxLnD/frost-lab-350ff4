@@ -7,22 +7,23 @@
 
 /* ---------- ПАЛИТРЫ ---------- */
 const THEMES={
+  /* ── ВСЕ ТЁМНЫЕ. day = чуть светлее/теплее, night = глубже ── */
   winterNight:{mode:'dark',bg:'#060e1a',card:'rgba(9,20,37,.72)',ice:'#a8d8f0',icdim:'#4a8ab0',cop:'#c49a6c',txt:'#d4e8f5',mut:'#7a9ab8',bdr:'rgba(168,216,240,.14)',
     grad:'radial-gradient(60% 50% at 20% 0%,rgba(42,108,176,.2),transparent 60%),radial-gradient(70% 60% at 50% 110%,rgba(74,138,176,.16),transparent 60%),linear-gradient(180deg,#040912,#060e1a 45%,#08182b)'},
-  winterDay:{mode:'light',bg:'#dee5ec',card:'rgba(255,255,255,.72)',ice:'#3f4b68',icdim:'#57607c',cop:'#8a3340',txt:'#1d2136',mut:'#57607c',bdr:'rgba(39,54,63,.18)',
-    grad:'radial-gradient(60% 50% at 20% 0%,rgba(130,142,165,.4),transparent 60%),radial-gradient(70% 60% at 80% 110%,rgba(87,96,124,.28),transparent 60%),linear-gradient(180deg,#e8eef3,#dce0e8 50%,#cfd8e2)'},
-  springDay:{mode:'light',bg:'#e9e7e1',card:'rgba(255,255,255,.7)',ice:'#567f75',icdim:'#7f9f8e',cop:'#be6a63',txt:'#3a4a44',mut:'#7d8a84',bdr:'rgba(86,127,117,.18)',
-    grad:'radial-gradient(60% 50% at 20% 0%,rgba(227,160,154,.32),transparent 60%),radial-gradient(70% 60% at 80% 110%,rgba(150,171,162,.32),transparent 60%),linear-gradient(180deg,#eef0e8,#e9e7e1 50%,#e3e7d7)'},
-  springNight:{mode:'dark',bg:'#1c1418',card:'rgba(40,28,34,.72)',ice:'#e3a09a',icdim:'#9b5e61',cop:'#96aba2',txt:'#ecdde0',mut:'#a08a90',bdr:'rgba(227,160,154,.16)',
-    grad:'radial-gradient(60% 50% at 20% 0%,rgba(155,94,97,.32),transparent 60%),radial-gradient(70% 60% at 80% 110%,rgba(86,127,117,.24),transparent 60%),linear-gradient(180deg,#140d11,#1c1418 50%,#241a20)'},
-  summerDay:{mode:'light',bg:'#e7f3f3',card:'rgba(255,255,255,.68)',ice:'#0096a5',icdim:'#3a9aab',cop:'#c0895f',txt:'#0a3a40',mut:'#4a7a82',bdr:'rgba(0,150,165,.2)',
-    grad:'radial-gradient(60% 50% at 20% 0%,rgba(78,189,213,.42),transparent 60%),radial-gradient(70% 60% at 80% 110%,rgba(182,219,229,.5),transparent 60%),linear-gradient(180deg,#eef7f6,#e7f3f3 50%,#dceeed)'},
-  summerNight:{mode:'dark',bg:'#0e1f22',card:'rgba(20,40,42,.74)',ice:'#7fc8c0',icdim:'#46707e',cop:'#afbb98',txt:'#d8ece8',mut:'#6e9690',bdr:'rgba(120,200,190,.16)',
-    grad:'radial-gradient(60% 50% at 20% 0%,rgba(70,112,126,.42),transparent 60%),radial-gradient(70% 60% at 80% 110%,rgba(127,200,192,.2),transparent 60%),linear-gradient(180deg,#0a1719,#0e1f22 50%,#12282b)'},
-  autumnDay:{mode:'light',bg:'#f3ecd8',card:'rgba(255,252,244,.72)',ice:'#d15c1d',icdim:'#c08a3a',cop:'#5f8a8b',txt:'#493c33',mut:'#8a6f55',bdr:'rgba(73,60,51,.18)',
-    grad:'radial-gradient(60% 50% at 20% 0%,rgba(242,167,45,.42),transparent 60%),radial-gradient(70% 60% at 80% 110%,rgba(160,190,191,.38),transparent 60%),linear-gradient(180deg,#f7f1e0,#f3ecd8 50%,#efe4c8)'},
-  autumnNight:{mode:'dark',bg:'#131d26',card:'rgba(28,30,34,.76)',ice:'#fec579',icdim:'#ed9e51',cop:'#9b7252',txt:'#f0dcc0',mut:'#9a8a78',bdr:'rgba(254,197,121,.16)',
-    grad:'radial-gradient(60% 50% at 20% 0%,rgba(237,158,81,.34),transparent 60%),radial-gradient(70% 60% at 80% 110%,rgba(155,114,82,.3),transparent 60%),linear-gradient(180deg,#0e151c,#131d26 50%,#19222b)'},
+  winterDay:{mode:'dark',bg:'#0a1626',card:'rgba(16,30,50,.72)',ice:'#bfe6ff',icdim:'#5a9ac4',cop:'#d3a878',txt:'#e2f1fb',mut:'#8fb0cc',bdr:'rgba(190,228,255,.16)',
+    grad:'radial-gradient(60% 50% at 20% 0%,rgba(60,130,200,.26),transparent 60%),radial-gradient(70% 60% at 50% 110%,rgba(90,154,196,.2),transparent 60%),linear-gradient(180deg,#081424,#0a1626 45%,#0c2236)'},
+  summerNight:{mode:'dark',bg:'#0a1719',card:'rgba(18,38,40,.74)',ice:'#7fd8d0',icdim:'#3f8a8c',cop:'#c9b07a',txt:'#d4eeea',mut:'#6f9a96',bdr:'rgba(127,216,208,.15)',
+    grad:'radial-gradient(60% 50% at 20% 0%,rgba(58,120,128,.34),transparent 60%),radial-gradient(70% 60% at 50% 110%,rgba(78,189,213,.16),transparent 60%),linear-gradient(180deg,#071213,#0a1719 45%,#0d2024)'},
+  summerDay:{mode:'dark',bg:'#0c1f22',card:'rgba(20,44,46,.72)',ice:'#8fe8df',icdim:'#4ebdd5',cop:'#d8b98a',txt:'#dcf2ee',mut:'#7aa8a4',bdr:'rgba(143,232,223,.16)',
+    grad:'radial-gradient(60% 50% at 20% 0%,rgba(78,189,213,.3),transparent 60%),radial-gradient(70% 60% at 50% 110%,rgba(127,216,208,.2),transparent 60%),linear-gradient(180deg,#0a1a1c,#0c1f22 45%,#0f2629)'},
+  autumnNight:{mode:'dark',bg:'#131015',card:'rgba(30,22,26,.76)',ice:'#fec579',icdim:'#d98f4a',cop:'#c97f52',txt:'#f0dcc0',mut:'#a08a78',bdr:'rgba(254,197,121,.15)',
+    grad:'radial-gradient(60% 50% at 20% 0%,rgba(209,92,29,.26),transparent 60%),radial-gradient(70% 60% at 50% 110%,rgba(155,114,82,.24),transparent 60%),linear-gradient(180deg,#0e0b10,#131015 45%,#1a1411)'},
+  autumnDay:{mode:'dark',bg:'#1a1410',card:'rgba(38,28,20,.74)',ice:'#ffd089',icdim:'#ed9e51',cop:'#d88a5a',txt:'#f4e2c8',mut:'#b09478',bdr:'rgba(255,208,137,.16)',
+    grad:'radial-gradient(60% 50% at 20% 0%,rgba(242,167,45,.3),transparent 60%),radial-gradient(70% 60% at 50% 110%,rgba(209,92,29,.2),transparent 60%),linear-gradient(180deg,#140f0b,#1a1410 45%,#20180f)'},
+  springNight:{mode:'dark',bg:'#160f14',card:'rgba(34,22,28,.74)',ice:'#e8aaa4',icdim:'#a56368',cop:'#9ab0a6',txt:'#eddde0',mut:'#a88e94',bdr:'rgba(232,170,164,.15)',
+    grad:'radial-gradient(60% 50% at 20% 0%,rgba(155,94,97,.3),transparent 60%),radial-gradient(70% 60% at 50% 110%,rgba(86,127,117,.2),transparent 60%),linear-gradient(180deg,#110c0f,#160f14 45%,#1d141a)'},
+  springDay:{mode:'dark',bg:'#1a1218',card:'rgba(40,26,34,.72)',ice:'#f0b5af',icdim:'#be6a63',cop:'#a6bcb0',txt:'#f2e2e4',mut:'#b29aa0',bdr:'rgba(240,181,175,.16)',
+    grad:'radial-gradient(60% 50% at 20% 0%,rgba(227,160,154,.28),transparent 60%),radial-gradient(70% 60% at 50% 110%,rgba(150,176,166,.22),transparent 60%),linear-gradient(180deg,#150e13,#1a1218 45%,#21161e)'},
 };
 const SEASONS=[['winter','❄ Зима'],['spring','🌸 Весна'],['summer','☀ Лето'],['autumn','🍁 Осень']];
 
@@ -87,8 +88,8 @@ function applyTheme(){
   r.setProperty('--icdim',t.icdim);r.setProperty('--cop',t.cop);r.setProperty('--txt',t.txt);
   r.setProperty('--mut',t.mut);r.setProperty('--bdr',t.bdr);r.setProperty('--grad',t.grad);
   document.body.setAttribute('data-theme',key);
-  document.body.classList.toggle('theme-light',t.mode==='light');
-  document.body.classList.toggle('theme-dark',t.mode==='dark');
+  document.body.classList.toggle('theme-light',false);
+  document.body.classList.toggle('theme-dark',true);
   // update toggle icon
   const tg=document.getElementById('themeToggle');if(tg)tg.textContent=(s.mode==='day'?'🌙':'☀');
   // update season buttons
