@@ -68,6 +68,13 @@ body[data-theme] .mc-title{color:var(--ice)!important;}
 body[data-theme] .mc-date{color:color-mix(in srgb,var(--txt) 65%,transparent)!important;}
 body[data-theme] .mc-open{color:var(--ice)!important;}
 
+/* === Бегущая строка с цитатами Зейна — в палитре сезона === */
+body[data-theme] .hero-marquee{
+  border-top-color:color-mix(in srgb,var(--ice) 18%,transparent)!important;
+  border-bottom-color:color-mix(in srgb,var(--ice) 18%,transparent)!important;}
+body[data-theme] .marquee-quote{color:color-mix(in srgb,var(--ice) 70%,transparent)!important;}
+body[data-theme] .marquee-sep{color:color-mix(in srgb,var(--cop) 60%,transparent)!important;}
+
 
 /* === ИСКЛЮЧЕНИЕ: на вкладках WU и Мифы вернуть ОРИГИНАЛЬНЫЕ фоны === */
 /* WU — агрессивная красная подсветка (восстановлено) */
