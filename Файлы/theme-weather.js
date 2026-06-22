@@ -69,9 +69,21 @@ body[data-theme] .mc-date{color:color-mix(in srgb,var(--txt) 65%,transparent)!im
 body[data-theme] .mc-open{color:var(--ice)!important;}
 
 
-/* === ИСКЛЮЧЕНИЕ: на вкладках WU и Мифы вернуть ОРИГИНАЛЬНЫЙ фон === */
-body[data-tab="wu"]::before,body[data-tab="myths"]::before{
-  background:radial-gradient(60% 50% at 20% 0%,rgba(42,108,176,.2),transparent 60%),radial-gradient(70% 60% at 50% 110%,rgba(74,138,176,.16),transparent 60%),linear-gradient(180deg,#040912,#060e1a 45%,#08182b)!important;}
+/* === ИСКЛЮЧЕНИЕ: на вкладках WU и Мифы вернуть ОРИГИНАЛЬНЫЕ фоны === */
+/* WU — агрессивная красная подсветка (восстановлено) */
+body[data-tab="wu"]::before{
+  background:
+    radial-gradient(58% 60% at 8% 38%,rgba(255,45,75,.28),transparent 60%),
+    radial-gradient(46% 50% at 88% 72%,rgba(70,200,255,.10),transparent 60%),
+    radial-gradient(70% 50% at 50% 115%,rgba(150,30,72,.22),transparent 62%),
+    linear-gradient(180deg,#08060c 0%,#0c0810 45%,#150a17 100%)!important;}
+/* Мифы — нефрит + золото (оригинал) */
+body[data-tab="myths"]::before{
+  background:
+    radial-gradient(55% 50% at 20% 10%,rgba(118,208,189,.12),transparent 60%),
+    radial-gradient(50% 50% at 85% 20%,rgba(200,170,110,.10),transparent 58%),
+    radial-gradient(70% 55% at 50% 115%,rgba(40,60,90,.30),transparent 62%),
+    linear-gradient(180deg,#060910 0%,#0a0f1c 100%)!important;}
 body[data-tab="wu"] #main-nav,body[data-tab="myths"] #main-nav{background:rgba(6,14,26,.94)!important;}
 /* и не перекрашивать сами панели WU/Мифов (на всякий случай — они со своими классами, мы их и не трогаем) */
 
