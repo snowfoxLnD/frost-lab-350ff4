@@ -20,7 +20,7 @@
 <meta name="twitter:image" content="https://snowfoxlnd.github.io/akso-archive/./%D0%A4%D0%B0%D0%B9%D0%BB%D1%8B/%D0%90%D0%BA%D1%81%D0%BE%20%D0%BB%D0%BE%D0%B3%D0%BE%20(%D0%BD%D1%83%D0%B6%D0%BD%D0%BE%D0%B5).png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Allura&display=swap&family=Audiowide&family=Playfair+Display:wght@600" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Raleway:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Chakra+Petch:wght@500;600;700&family=Cinzel:wght@500;600&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
 <style>
 @font-face{font-family:'FHWA';src:url('./%D0%A4%D0%B0%D0%B9%D0%BB%D1%8B/FHWASeriesEM_Rg.ttf') format('truetype');}
@@ -104,13 +104,13 @@ body::after{content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;opa
 /* title */
 #title-scr{background:var(--bg);}
 .title-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 50%,rgba(74,138,176,.1)0%,transparent 68%);pointer-events:none;}
-.site-big{font-family:'Orbitron',monospace;font-weight:900;font-size:clamp(2.2rem,8vw,6rem);letter-spacing:.06em;color:#eaf3f9;line-height:1.1;text-shadow:0 0 70px rgba(168,216,240,.2);text-align:center;animation:fadeUp 1s ease both;position:relative;}
+.site-big{font-family:'Audiowide',cursive;font-weight:400;font-size:clamp(2.2rem,8vw,6rem);letter-spacing:.06em;color:#eaf3f9;line-height:1.1;text-shadow:0 0 70px rgba(168,216,240,.2);text-align:center;animation:fadeUp 1s ease both;position:relative;}
 .site-big::before,.site-big::after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;text-align:center;pointer-events:none;opacity:.0;}
 .site-big::before{color:#ff3b4e;animation:glitchA 5.5s steps(1) infinite;}
 .site-big::after{color:#46d0ff;animation:glitchB 5.5s steps(1) infinite;}
 @keyframes glitchA{0%,92%,100%{opacity:0;transform:none}93%{opacity:.7;transform:translate(-3px,1px)}95%{opacity:.6;transform:translate(2px,-1px)}97%{opacity:0}}
 @keyframes glitchB{0%,92%,100%{opacity:0;transform:none}94%{opacity:.7;transform:translate(3px,-1px)}96%{opacity:.6;transform:translate(-2px,1px)}98%{opacity:0}}
-.site-tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.88rem,1.8vw,1.1rem);color:var(--mut);text-align:center;margin-top:16px;animation:fadeUp 1s .3s ease both;}
+.site-tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.88rem,1.8vw,1.1rem);color:#c8dcec;text-align:center;margin-top:16px;animation:fadeUp 1s .3s ease both;}
 .title-btns{display:flex;gap:12px;margin-top:44px;flex-wrap:wrap;justify-content:center;animation:fadeUp 1s .6s ease both;}
 .title-btn{font-family:'Raleway',sans-serif;font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ice);background:rgba(74,138,176,.08);border:1px solid rgba(74,138,176,.38);padding:13px 36px;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block;}
 .title-btn:hover{background:rgba(74,138,176,.2);border-color:var(--ice);}
@@ -215,7 +215,7 @@ body::after{content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;opa
 .mc-rarity .tag.tg-wu{color:#4acce0;border-color:rgba(74,200,224,.3);}
 .mc-rarity .tag.tg-myth{color:#a080e0;border-color:rgba(160,128,224,.3);}
 .mc-rarity .tag.tg-meta{color:var(--cop);border-color:rgba(196,154,108,.3);}
-.mc-title{font-family:'Cormorant Garamond',serif;font-size:1.32rem;font-weight:500;color:#eaf3f9;line-height:1.25;margin-bottom:6px;}
+.mc-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;color:#ffffff;line-height:1.25;margin-bottom:6px;}
 .mc-diag{font-size:.74rem;line-height:1.65;color:var(--mut);
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
 .mc-diag .k{font-family:var(--mono);font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:var(--icdim);display:block;margin-bottom:3px;}
@@ -740,11 +740,10 @@ body.day{--bg:#cfe0ee;--card:rgba(255,255,255,.82);--txt:#1a2a3a;--mut:#4a6882;-
 <!-- TITLE -->
 <div class="screen" id="title-scr">
   <div class="title-glow"></div>
-  <div class="site-big" data-text="Архив Аксо">Архив Аксо</div>
+  <div class="site-big" data-text="ARCHIVE AKSO">ARCHIVE AKSO</div>
   <div class="site-tag">Создано Лисёнком Доктора Ноа — для Жасминок и не только</div>
   <div class="title-btns">
     <button class="title-btn" onclick="enterSite()">Перейти в архив →</button>
-    <a class="title-btn tg" href="https://t.me/snowfox_lnd" target="_blank">↗ Telegram-канал</a>
   </div>
 </div>
 
