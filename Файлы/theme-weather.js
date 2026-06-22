@@ -40,10 +40,32 @@ body[data-theme] .story-card,body[data-theme] .pcard,body[data-theme] .ccard,bod
 /* поиск */
 body[data-theme] .search-box,body[data-theme] #search-input,body[data-theme] [class*="search"]{background:color-mix(in srgb,var(--bg) 70%,transparent)!important;border-color:var(--bdr)!important;}
 /* досье: все панели */
-body[data-theme] .ds-card,body[data-theme] .ds-zayne,body[data-theme] .ds-rx,body[data-theme] .ds-ach,body[data-theme] .ds-accat,body[data-theme] .ds-io,body[data-theme] .ds-tools .ds-tbtn,body[data-theme] .ds-ach .ds-ic{background:var(--card)!important;}
-body[data-theme] .ds-card,body[data-theme] .ds-zayne,body[data-theme] .ds-rx,body[data-theme] .ds-ach,body[data-theme] .ds-accat,body[data-theme] .ds-io{border-color:var(--bdr)!important;}
+body[data-theme] .ds-card,body[data-theme] .ds-zayne,body[data-theme] .ds-ach,body[data-theme] .ds-accat,body[data-theme] .ds-io,body[data-theme] .ds-tools .ds-tbtn,body[data-theme] .ds-ach .ds-ic{background:var(--card)!important;}
+body[data-theme] .ds-card,body[data-theme] .ds-zayne,body[data-theme] .ds-ach,body[data-theme] .ds-accat,body[data-theme] .ds-io{border-color:var(--bdr)!important;}
 /* каналы внизу — общий блок (если не wu/myth) */
 body[data-theme] .ch-bar{background:var(--card)!important;border-color:var(--bdr)!important;}
+
+/* === Рецепт: ледяная «бумага» в цветах Аксо (не коричневый) === */
+body[data-theme] .ds-rx{background:linear-gradient(160deg,#eef6fc,#dcebf6)!important;color:#16242f!important;border:1px solid color-mix(in srgb,var(--ice) 50%,#9fc4dd)!important;}
+body[data-theme] .ds-rx::before{background:repeating-linear-gradient(180deg,#3a6f93 0 6px,transparent 6px 14px)!important;opacity:.5!important;}
+body[data-theme] .ds-rx-symbol{color:#2f6f93!important;}
+body[data-theme] .ds-rx-t{color:#4a6675!important;}
+body[data-theme] .ds-rx-d{color:#6a8696!important;}
+body[data-theme] .ds-rx-body{color:#16242f!important;}
+body[data-theme] .ds-rx-roll{color:#2f6f93!important;border-color:rgba(47,111,147,.4)!important;}
+body[data-theme] .ds-rx-roll:hover{background:rgba(47,111,147,.08)!important;}
+body[data-theme] .ds-rx-sig{color:#2f6f93!important;}
+/* Зейн-реплика (ds-zayne пузырь) тоже была светлой бумагой — оставим читаемой */
+body[data-theme] .ds-zayne .ds-z-bubble,body[data-theme] .ds-zbubble{color:inherit;}
+
+/* === Текст карточек: ярче и в палитре === */
+body[data-theme] .mc-diag{color:color-mix(in srgb,var(--txt) 88%,transparent)!important;}
+body[data-theme] .mc-diag .k{color:var(--ice)!important;opacity:.95;}
+body[data-theme] .mc-field{color:color-mix(in srgb,var(--txt) 70%,transparent)!important;}
+body[data-theme] .mc-title{color:var(--ice)!important;}
+body[data-theme] .mc-date{color:color-mix(in srgb,var(--txt) 65%,transparent)!important;}
+body[data-theme] .mc-open{color:var(--ice)!important;}
+
 
 /* === ИСКЛЮЧЕНИЕ: на вкладках WU и Мифы вернуть ОРИГИНАЛЬНЫЙ фон === */
 body[data-tab="wu"]::before,body[data-tab="myths"]::before{
