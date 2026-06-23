@@ -194,6 +194,25 @@ body::after{content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;opa
 .mcard{position:relative;background:var(--card-bg);border:1px solid var(--bdr);cursor:pointer;
   -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
   transition:transform .35s cubic-bezier(.2,.7,.3,1),border-color .35s,box-shadow .35s;overflow:hidden;}
+
+/* ── избранное: пиксельная снежинка-кнопка на карточке ── */
+.fav-btn{position:absolute;top:8px;right:8px;z-index:6;width:30px;height:30px;border:1px solid var(--bdr);
+  background:rgba(6,12,22,.72);color:var(--mut);border-radius:3px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;padding:0;
+  transition:color .2s,border-color .2s,background .2s,transform .15s;}
+.fav-btn:hover{color:var(--ice);border-color:var(--ice);transform:scale(1.08);}
+.fav-btn[aria-pressed="true"]{color:var(--ice);border-color:var(--ice);
+  background:color-mix(in srgb,var(--ice) 18%,rgba(6,12,22,.72));
+  box-shadow:0 0 14px color-mix(in srgb,var(--ice) 40%,transparent);}
+.snow-ic{width:14px;height:14px;display:block;image-rendering:pixelated;image-rendering:crisp-edges;}
+.snow-ic path{fill:currentColor;shape-rendering:crispEdges;}
+.mcard.is-fav{border-color:color-mix(in srgb,var(--ice) 45%,var(--bdr));}
+.mcard.is-fav::after{content:'';position:absolute;inset:0;pointer-events:none;
+  box-shadow:inset 0 0 32px color-mix(in srgb,var(--ice) 14%,transparent);}
+
+/* ── фильтр-пилюля «Избранное» в субтабах карточек ── */
+.stab-btn.stab-fav{display:inline-flex;align-items:center;}
+.stab-btn.stab-fav .snow-ic{width:11px;height:11px;}
 .mcard:hover{transform:translateY(-5px);border-color:rgba(168,216,240,.4);box-shadow:0 14px 40px rgba(4,12,26,.6),0 0 0 1px rgba(168,216,240,.06);}
 .mcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;z-index:3;
   background:repeating-linear-gradient(180deg,var(--icdim) 0 7px,transparent 7px 16px);opacity:.5;}
@@ -826,9 +845,14 @@ body.day{--bg:#cfe0ee;--card:rgba(255,255,255,.82);--txt:#1a2a3a;--mut:#4a6882;-
       <div class="subtabs-nav">
         <button class="stab-btn active" onclick="switchStarTab('5',this)">★★★★★ &nbsp;5-звёздочные</button>
         <button class="stab-btn" onclick="switchStarTab('4',this)">★★★★ &nbsp;4-звёздочные</button>
+        <button class="stab-btn stab-fav" onclick="switchStarTab('fav',this)" title="Избранное">
+          <svg viewBox="0 0 13 13" class="snow-ic" aria-hidden="true"><path d="M6 0h1v3l2-1 1 1-3 2 3 2-1 1-2-1v3H6v-3l-2 1-1-1 3-2-3-2 1-1 2 1z"/></svg>
+          &nbsp;Избранное
+        </button>
       </div>
       <div id="cards-5-wrap" class="cards-grid"></div>
       <div id="cards-4-wrap" class="cards-grid" style="display:none"></div>
+      <div id="cards-fav-wrap" class="cards-grid" style="display:none"></div>
     </div>
 
     <!-- МИФЫ -->
@@ -1161,7 +1185,12 @@ function cardHTML(c,i){
   const diagLabel=available?'Анамнез':'Статус карты';
   const diagText=c.desc||'Запись доступна по ссылке. Откройте карту для перехода.';
   const vit=available?EKG_PATH:FLAT_PATH;
-  return`<div class="mcard" data-i="${i}" onclick="openCard(${i})">
+  const isFav=Array.isArray(DS.favorites)&&DS.favorites.includes(i);
+  const favBtn=`<button class="fav-btn" aria-pressed="${isFav?'true':'false'}" title="${isFav?'Убрать из избранного':'В избранное'}" onclick="toggleFavorite(${i},event)">
+    <svg viewBox="0 0 13 13" class="snow-ic" aria-hidden="true"><path d="M6 0h1v3l2-1 1 1-3 2 3 2-1 1-2-1v3H6v-3l-2 1-1-1 3-2-3-2 1-1 2 1z"/></svg>
+  </button>`;
+  return`<div class="mcard${isFav?' is-fav':''}" data-i="${i}" onclick="openCard(${i})">
+    ${favBtn}
     <div class="mc-head">
       <div class="mc-field">Пациент<br><b>ZAYNE</b></div>
       <div class="mc-field mc-no">Карта №<br><span class="num">${cardNo(i)}</span></div>
@@ -1473,6 +1502,33 @@ function switchStarTab(star,btn){
   btn.classList.add('active');
   document.getElementById('cards-5-wrap').style.display=star==='5'?'':'none';
   document.getElementById('cards-4-wrap').style.display=star==='4'?'':'none';
+  const fw=document.getElementById('cards-fav-wrap');
+  if(fw){fw.style.display=star==='fav'?'':'none';if(star==='fav')renderFavorites();}
+}
+function renderFavorites(){
+  const wrap=document.getElementById('cards-fav-wrap');if(!wrap)return;
+  const favs=(DS.favorites||[]).filter(i=>CARDS[i]&&(CARDS[i].type==='5'||CARDS[i].type==='4'));
+  if(!favs.length){
+    wrap.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px 20px;color:var(--mut);font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:1.05rem">Снежинка справа на карточке — добавить в Избранное.</div>';
+    return;
+  }
+  wrap.innerHTML=favs.map(i=>cardHTML(CARDS[i],i)).join('');
+}
+function toggleFavorite(i,ev){
+  if(ev){ev.stopPropagation();ev.preventDefault();}
+  if(!Array.isArray(DS.favorites))DS.favorites=[];
+  const k=DS.favorites.indexOf(i);
+  if(k>=0)DS.favorites.splice(k,1);else DS.favorites.push(i);
+  if(typeof dsSave==='function')dsSave();
+  // визуально обновить все экземпляры этой карты
+  document.querySelectorAll('.mcard[data-i="'+i+'"]').forEach(el=>{
+    const on=DS.favorites.includes(i);
+    el.classList.toggle('is-fav',on);
+    const btn=el.querySelector('.fav-btn');if(btn)btn.setAttribute('aria-pressed',on?'true':'false');
+  });
+  // если открыта вкладка избранного — перерисовать
+  const fw=document.getElementById('cards-fav-wrap');
+  if(fw&&fw.style.display!=='none')renderFavorites();
 }
 
 /* ── PARTICLES (rising dust) ── */
@@ -1667,7 +1723,7 @@ const ACH=[
   {id:'fullset',  e:'👑', img:ACH_IMG+'fullset.png',  n:'Полный допуск',         d:'Открыть все остальные допуски.',               r:'diamond'},
 ];
 
-let DS={u:[],name:'',photo:'',visits:0,id:null,rxRolls:0,zayneCount:0,globeShakes:0,channelsClicked:[],read:[]};
+let DS={u:[],name:'',photo:'',visits:0,id:null,rxRolls:0,zayneCount:0,globeShakes:0,channelsClicked:[],read:[],favorites:[]};
 try{const s=JSON.parse(localStorage.getItem('akso_dossier')||'null');if(s)DS=Object.assign(DS,s);}catch(e){}
 // drop legacy achievement ids no longer in ACH (e.g. cards4)
 if(Array.isArray(DS.u))DS.u=DS.u.filter(id=>ACH.some(a=>a.id===id));
@@ -2058,6 +2114,7 @@ if(document.getElementById('site')&&document.getElementById('site').classList.co
 <audio id="silenceAudio" src="./Файлы/silence.mp3" preload="none"></audio>
 
 <script src="./Файлы/card-drop.js"></script>
+<script src="./Файлы/newspaper.js"></script>
 <script src="./Файлы/theme-weather.js"></script>
 </body>
 </html>
