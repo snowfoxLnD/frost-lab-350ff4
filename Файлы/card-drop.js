@@ -55,7 +55,19 @@
   #cardDrop .cd-leaf{position:absolute;top:-16px;z-index:2;font-size:.9rem;pointer-events:none;opacity:.85;
     animation:cdFall linear forwards;}
   @keyframes cdFall{to{transform:translateY(190px) rotate(360deg);opacity:0;}}
-  @media(max-width:640px){#cardDrop{top:70px;}#cardDrop.on{right:50%;transform:translateX(50%);}}
+  @media(max-width:640px){
+    /* перенос баннера ВНИЗ экрана + компактный вид (раньше перекрывал контент сверху) */
+    #cardDrop{top:auto;bottom:-440px;right:50%;transform:translateX(50%);width:min(340px,88vw);}
+    #cardDrop.on{bottom:18px;right:50%;transform:translateX(50%);}
+    #cardDrop .cd-img{height:100px;}
+    #cardDrop .cd-img img{object-position:center 22%;}
+    #cardDrop .cd-body{padding:10px 14px 14px;}
+    #cardDrop .cd-title{font-size:1rem!important;}
+    #cardDrop .cd-headline{font-size:.78rem!important;}
+    #cardDrop .cd-sub{font-size:.65rem!important;margin-top:3px!important;}
+    #cardDrop .cd-x{top:8px;right:8px;width:26px;height:26px;}
+    #cardDrop .cd-badge,#cardDrop .cd-status{font-size:.5rem!important;}
+  }
   `;
   const style=document.createElement('style');style.textContent=css;document.head.appendChild(style);
 
