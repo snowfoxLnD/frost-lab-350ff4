@@ -92,6 +92,14 @@ body[data-tab="myths"]::before{
     radial-gradient(70% 55% at 50% 115%,rgba(40,60,90,.30),transparent 62%),
     linear-gradient(180deg,#060910 0%,#0a0f1c 100%)!important;}
 body[data-tab="wu"] #main-nav,body[data-tab="myths"] #main-nav{background:rgba(6,14,26,.94)!important;}
+
+/* === ИСКЛЮЧЕНИЕ: вкладка газеты держит свой собственный фон (не зависит от сезона) === */
+body[data-tab="newspaper"]::before{
+  background:
+    radial-gradient(60% 50% at 20% 0%,rgba(180,140,80,.10),transparent 60%),
+    radial-gradient(70% 60% at 80% 110%,rgba(40,30,20,.30),transparent 60%),
+    linear-gradient(180deg,#0a0810 0%,#0c0a14 100%)!important;}
+body[data-tab="newspaper"] #main-nav{background:rgba(10,8,16,.94)!important;}
 /* и не перекрашивать сами панели WU/Мифов (на всякий случай — они со своими классами, мы их и не трогаем) */
 
 /* === МАСШТАБ === */
