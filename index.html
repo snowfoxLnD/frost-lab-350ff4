@@ -685,7 +685,7 @@ body.day{--bg:#cfe0ee;--card:rgba(255,255,255,.82);--txt:#1a2a3a;--mut:#4a6882;-
   #rx-pill{right:12px;}
 }
 
-.ds-rank{color:#bfe6ff!important;text-shadow:0 0 18px rgba(168,216,240,.35);}
+.ds-rank{color:var(--ice)!important;text-shadow:0 0 18px color-mix(in srgb,var(--ice) 35%,transparent);}
 .ds-rank-next{font-family:'JetBrains Mono',monospace;font-size:.46rem;letter-spacing:.1em;color:var(--mut);margin-top:3px;}
 /* collapsible achievement categories */
 .ds-accat{border:1px solid var(--bdr);background:rgba(6,12,22,.3);margin-bottom:10px;}
@@ -1299,6 +1299,10 @@ function openCard(i){
       const all5=CARDS.map((x,idx)=>({x,idx})).filter(o=>o.x.type==='5');
       if(all5.every(o=>DS.read.includes(o.idx)))dsUnlock('cards5');
     }
+    if(c.type==='4'){
+      const all4=CARDS.map((x,idx)=>({x,idx})).filter(o=>o.x.type==='4');
+      if(all4.every(o=>DS.read.includes(o.idx)))dsUnlock('cards4');
+    }
   }catch(e){}
   const available=!!c.link;
   const imgBlock=c.img
@@ -1635,7 +1639,7 @@ function accessRank(u,tot){
 /* Категории ачивок */
 const ACH_CATS=[
   {cat:'Исследование', ids:['visit','myths','under','channels']},
-  {cat:'Коллекция',    ids:['cards5','rx']},
+  {cat:'Коллекция',    ids:['cards5','cards4','rx']},
   {cat:'Секреты',      ids:['freeze','silence','insomnia','fullset']},
   {cat:'Лор',          ids:['zayne10','name','photo']},
   {cat:'Сезонные',     ids:['bday','aurora','night']},
@@ -1646,6 +1650,7 @@ const ACH_IMG='./Файлы/achievements/';
 const ACH=[
   {id:'visit',    e:'🚪', img:ACH_IMG+'visit.png',    n:'Первый визит',          d:'Войти в Архив Аксо.',                          r:'blue'},
   {id:'cards5',   e:'🩺', img:ACH_IMG+'cards5.png',   n:'Полный осмотр',         d:'Прочитать все 5★ карточки.',                   r:'jade'},
+  {id:'cards4',   e:'🎴', img:ACH_IMG+'cards4.png',   n:'Полевой опыт',          d:'Собрать все 4★ карточки («Боевой Пропуск»).',  r:'jade'},
   {id:'myths',    e:'⛩️', img:ACH_IMG+'myths.png',    n:'Хранитель мифов',       d:'Открыть оба мифа.',                            r:'jade'},
   {id:'under',    e:'🕳️', img:ACH_IMG+'under.png',    n:'Спуск в подземелье',    d:'Побывать в World Underneath.',                 r:'blue'},
   {id:'freeze',   e:'❄️', img:ACH_IMG+'freeze.png',   n:'Криокамера',            d:'Активировать секретное слово в поиске.',       r:'gold'},
