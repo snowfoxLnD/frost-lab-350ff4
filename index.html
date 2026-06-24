@@ -578,6 +578,9 @@ button.nav-link{background:none;border:none;cursor:pointer;font-weight:700;lette
 .ds-ic-em{font-size:1.3rem;line-height:1;}
 .ds-ic-img{width:100%;height:100%;object-fit:contain;image-rendering:pixelated;image-rendering:crisp-edges;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4));}
 .ds-ach.locked .ds-ic-img{filter:drop-shadow(0 2px 6px rgba(0,0,0,.4)) grayscale(.7);opacity:.55;}
+/* per-icon adjustments */
+.ds-ic-img[src$="freeze.png"]{transform:scale(1.22);transform-origin:center;}
+.ds-ic-img[src$="zayne10.png"]{object-position:center 38%;transform:scale(1.06);transform-origin:center;}
 .ds-ach .ds-ab{flex:1;min-width:0;}
 .ds-ach .ds-an{font-family:'Orbitron',monospace;font-size:.62rem;letter-spacing:.04em;color:#eaf3f9;line-height:1.3;}
 .ds-ach .ds-ad{font-size:.68rem;color:var(--mut);line-height:1.4;margin-top:4px;}
@@ -1697,7 +1700,7 @@ const ACH_CATS=[
   {cat:'Исследование', ids:['visit','myths','under','channels']},
   {cat:'Коллекция',    ids:['cards5','cards4','rx']},
   {cat:'Секреты',      ids:['freeze','silence','insomnia','fullset']},
-  {cat:'Лор',          ids:['zayne10','name','photo']},
+  {cat:'Лор',          ids:['zayne10','name','photo','news10']},
   {cat:'Сезонные',     ids:['bday','aurora','night']},
 ];
 
@@ -1706,7 +1709,7 @@ const ACH_IMG='./Файлы/achievements/';
 const ACH=[
   {id:'visit',    e:'🚪', img:ACH_IMG+'visit.png',    n:'Первый визит',          d:'Войти в Архив Аксо.',                          r:'blue'},
   {id:'cards5',   e:'🩺', img:ACH_IMG+'cards5.png',   n:'Полный осмотр',         d:'Прочитать все 5★ карточки.',                   r:'jade'},
-  {id:'cards4',   e:'🎴', img:ACH_IMG+'cards4.png',   n:'Полевой опыт',          d:'Собрать все 4★ карточки («Боевой Пропуск»).',  r:'jade'},
+  {id:'cards4',   e:'🎴', img:ACH_IMG+'cards4.png',   n:'Полевой опыт',          d:'Собрать все 4★ карточки.',                    r:'jade'},
   {id:'myths',    e:'⛩️', img:ACH_IMG+'myths.png',    n:'Хранитель мифов',       d:'Открыть оба мифа.',                            r:'jade'},
   {id:'under',    e:'🕳️', img:ACH_IMG+'under.png',    n:'Спуск в подземелье',    d:'Побывать в World Underneath.',                 r:'blue'},
   {id:'freeze',   e:'❄️', img:ACH_IMG+'freeze.png',   n:'Криокамера',            d:'Активировать секретное слово в поиске.',       r:'gold'},
@@ -1721,12 +1724,15 @@ const ACH=[
   {id:'silence',  e:'🤫', img:ACH_IMG+'silence.png',  n:'Тишина',                d:'Прошептать «Silence».',                        r:'diamond', secret:true},
   {id:'insomnia', e:'🕯️', img:ACH_IMG+'insomnia.png', n:'Бессонница хирурга',    d:'Зайти между 02:00 и 04:00.',                   r:'gold', secret:true},
   {id:'fullset',  e:'👑', img:ACH_IMG+'fullset.png',  n:'Полный допуск',         d:'Открыть все остальные допуски.',               r:'diamond'},
+  {id:'news10',   e:'📰', img:ACH_IMG+'news10.png',   n:'Постоянный читатель',   d:'Прочитать 10 выпусков «Линкон Таймс».',        r:'jade'},
 ];
 
-let DS={u:[],name:'',photo:'',visits:0,id:null,rxRolls:0,zayneCount:0,globeShakes:0,channelsClicked:[],read:[],favorites:[]};
+let DS={u:[],name:'',photo:'',visits:0,id:null,rxRolls:0,zayneCount:0,globeShakes:0,channelsClicked:[],read:[],favorites:[],newspaperReads:[]};
 try{const s=JSON.parse(localStorage.getItem('akso_dossier')||'null');if(s)DS=Object.assign(DS,s);}catch(e){}
 // drop legacy achievement ids no longer in ACH (e.g. cards4)
 if(Array.isArray(DS.u))DS.u=DS.u.filter(id=>ACH.some(a=>a.id===id));
+// catch-up: news10 if there are already 10+ weekly reads
+if(Array.isArray(DS.newspaperReads)&&DS.newspaperReads.length>=10&&!DS.u.includes('news10'))DS.u.push('news10');
 DS.visits=(DS.visits||0)+1;
 if(!DS.id)DS.id='AH-'+String(Math.floor(1000+Math.random()*8999));
 function dsSave(){try{localStorage.setItem('akso_dossier',JSON.stringify(DS));}catch(e){}}
@@ -2113,7 +2119,8 @@ if(document.getElementById('site')&&document.getElementById('site').classList.co
 </div>
 <audio id="silenceAudio" src="./Файлы/silence.mp3" preload="none"></audio>
 
-<script src="./Файлы/card-drop.js"></script>
+<!-- card-drop temporarily disabled — see Silent Underflow rollout later -->
+<!-- <script src="./Файлы/card-drop.js"></script> -->
 <script src="./Файлы/newspaper.js"></script>
 <script src="./Файлы/profile.js"></script>
 <script src="./Файлы/theme-weather.js"></script>
