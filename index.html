@@ -1749,17 +1749,38 @@ try{const s=JSON.parse(localStorage.getItem('akso_dossier')||'null');if(s)DS=Obj
 if(Array.isArray(DS.u))DS.u=DS.u.filter(id=>ACH.some(a=>a.id===id));
 // catch-up: news10 if there are already 10+ weekly reads
 if(Array.isArray(DS.newspaperReads)&&DS.newspaperReads.length>=10&&!DS.u.includes('news10'))DS.u.push('news10');
+// держим «Полный допуск» в согласии с остальными ачивками при загрузке
+(function(){const rest=ACH.filter(a=>a.id!=='fullset');const all=rest.every(a=>DS.u.includes(a.id));const has=DS.u.includes('fullset');if(all&&!has)DS.u.push('fullset');if(!all&&has)DS.u=DS.u.filter(id=>id!=='fullset');})();
 DS.visits=(DS.visits||0)+1;
 if(!DS.id)DS.id='AH-'+String(Math.floor(1000+Math.random()*8999));
 function dsSave(){try{localStorage.setItem('akso_dossier',JSON.stringify(DS));}catch(e){}}
 
 function dsUn(id){return DS.u.includes(id);}
+// держит ачивку «Полный допуск» в согласии с остальными:
+// открывает когда всё собрано, и СНИМАЕТ если хоть одна базовая пропала
+function dsSyncFullset(){
+  const rest=ACH.filter(a=>a.id!=='fullset');
+  const haveAll=rest.every(a=>dsUn(a.id));
+  const hasFull=dsUn('fullset');
+  if(haveAll&&!hasFull){DS.u.push('fullset');return 'unlocked';}
+  if(!haveAll&&hasFull){DS.u=DS.u.filter(id=>id!=='fullset');return 'revoked';}
+  return null;
+}
 function dsUnlock(id,silent){
   if(dsUn(id))return;
   DS.u.push(id);dsSave();dsRender();
   if(!silent){const a=ACH.find(x=>x.id===id);if(a)dsToast(a);}
-  const rest=ACH.filter(a=>a.id!=='fullset');
-  if(rest.every(a=>dsUn(a.id))&&!dsUn('fullset'))setTimeout(()=>dsUnlock('fullset'),900);
+  if(id!=='fullset'){
+    const rest=ACH.filter(a=>a.id!=='fullset');
+    if(rest.every(a=>dsUn(a.id))&&!dsUn('fullset'))setTimeout(()=>dsUnlock('fullset'),900);
+  }
+}
+// снять ачивку и пересчитать «Полный допуск»
+function dsRevoke(id){
+  if(!dsUn(id))return;
+  DS.u=DS.u.filter(x=>x!==id);
+  dsSyncFullset();
+  dsSave();dsRender();
 }
 function dsToast(a){
   const wrap=document.getElementById('ds-toasts');if(!wrap)return;
@@ -2135,8 +2156,7 @@ if(document.getElementById('site')&&document.getElementById('site').classList.co
 </div>
 <audio id="silenceAudio" src="./Файлы/silence.mp3" preload="none"></audio>
 
-<!-- card-drop temporarily disabled — see Silent Underflow rollout later -->
-<!-- <script src="./Файлы/card-drop.js"></script> -->
+<script src="./Файлы/card-drop.js"></script>
 <script src="./Файлы/newspaper.js"></script>
 <script src="./Файлы/profile.js"></script>
 <script src="./Файлы/theme-weather.js"></script>
