@@ -1553,6 +1553,8 @@ function toggleFavorite(i,ev){
   const fc=document.getElementById('frost-c');if(!fc)return;
   const fx=fc.getContext('2d');
   let W,H,melts=[];
+  // адаптивный радиус: на узких экранах меньше
+  const meltR=()=>innerWidth<480?22:(innerWidth<760?30:42);
   function resize(){W=fc.width=innerWidth;H=fc.height=innerHeight;buildFrost();}
   function buildFrost(){
     fx.clearRect(0,0,W,H);
@@ -1574,13 +1576,19 @@ function toggleFavorite(i,ev){
     g.addColorStop(.65,'rgba(190,222,250,.07)');g.addColorStop(1,'rgba(200,232,255,.22)');
     fx.fillStyle=g;fx.fillRect(0,0,W,H);fx.globalAlpha=1;
     fx.globalCompositeOperation='destination-out';
-    for(const m of melts){m.r+=5;const r=fx.createRadialGradient(m.x,m.y,0,m.x,m.y,58);
+    for(const m of melts){m.r+=3;const r=fx.createRadialGradient(m.x,m.y,0,m.x,m.y,m.maxR);
       r.addColorStop(0,'rgba(0,0,0,.55)');r.addColorStop(1,'rgba(0,0,0,0)');
-      fx.fillStyle=r;fx.beginPath();fx.arc(m.x,m.y,58,0,6.3);fx.fill();}
-    melts=melts.filter(m=>m.r<64);fx.globalCompositeOperation='source-over';
+      fx.fillStyle=r;fx.beginPath();fx.arc(m.x,m.y,m.maxR,0,6.3);fx.fill();}
+    melts=melts.filter(m=>m.r<m.maxR+6);fx.globalCompositeOperation='source-over';
   }
-  addEventListener('pointermove',e=>{if(document.getElementById('site').classList.contains('vis'))melts.push({x:e.clientX,y:e.clientY,r:0});});
-  addEventListener('touchmove',e=>{if(document.getElementById('site').classList.contains('vis'))for(const t of e.touches)melts.push({x:t.clientX,y:t.clientY,r:0});},{passive:true});
+  addEventListener('pointermove',e=>{if(document.getElementById('site').classList.contains('vis'))melts.push({x:e.clientX,y:e.clientY,r:0,maxR:meltR()});});
+  // troттлинг touchmove чтобы палец при скролле не спамил всю длину
+  let lastT=0;
+  addEventListener('touchmove',e=>{
+    const now=performance.now();if(now-lastT<55)return;lastT=now;
+    if(document.getElementById('site').classList.contains('vis'))
+      for(const t of e.touches)melts.push({x:t.clientX,y:t.clientY,r:0,maxR:meltR()});
+  },{passive:true});
   addEventListener('resize',resize);
   resize();requestAnimationFrame(loop);
 })();
