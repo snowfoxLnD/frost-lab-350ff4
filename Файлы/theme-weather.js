@@ -64,7 +64,7 @@ body[data-theme] .ds-zsig{color:#2f6f93!important;}
 body[data-theme] .mc-diag{color:color-mix(in srgb,var(--txt) 88%,transparent)!important;}
 body[data-theme] .mc-diag .k{color:var(--ice)!important;opacity:.95;}
 body[data-theme] .mc-field{color:color-mix(in srgb,var(--txt) 70%,transparent)!important;}
-body[data-theme] .mc-title{color:var(--ice)!important;}
+body[data-theme] .mc-title{color:#ffffff!important;}
 body[data-theme] .mc-date{color:color-mix(in srgb,var(--txt) 65%,transparent)!important;}
 body[data-theme] .mc-open{color:var(--ice)!important;}
 
