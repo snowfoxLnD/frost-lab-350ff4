@@ -572,9 +572,9 @@ button.nav-link{background:none;border:none;cursor:pointer;font-weight:700;lette
 .ds-ach[data-r="leg"]{border-left:2px solid var(--r-leg);}
 .ds-ach.unlocked[data-r="rare"]{box-shadow:0 0 16px rgba(201,162,74,.1);}
 .ds-ach.unlocked[data-r="leg"]{box-shadow:0 0 18px rgba(255,94,116,.14);}
-.ds-ach .ds-ic{flex-shrink:0;width:44px;height:44px;border:1px solid var(--bdr);display:flex;align-items:center;justify-content:center;font-size:1.3rem;background:rgba(6,12,22,.5);}
+.ds-ach .ds-ic{flex-shrink:0;width:52px;height:52px;border:1px solid var(--bdr);display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:rgba(6,12,22,.5);}
 /* if icon contains an image badge — drop the frame, let badge breathe */
-.ds-ach .ds-ic:has(img.ds-ic-img),.ds-toast .tic:has(img.ds-ic-img){border:0!important;background:transparent!important;width:64px;height:64px;}
+.ds-ach .ds-ic:has(img.ds-ic-img),.ds-toast .tic:has(img.ds-ic-img){border:0!important;background:transparent!important;width:72px;height:72px;}
 .ds-ic-em{font-size:1.3rem;line-height:1;}
 .ds-ic-img{width:100%;height:100%;object-fit:contain;image-rendering:pixelated;image-rendering:crisp-edges;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4));}
 .ds-ach.locked .ds-ic-img{filter:drop-shadow(0 2px 6px rgba(0,0,0,.4)) grayscale(.7);opacity:.55;}
@@ -1026,6 +1026,13 @@ const F='./%D0%A4%D0%B0%D0%B9%D0%BB%D1%8B/';
 /* ── CARD DATA ── */
 const CARDS=[
   /* 5★ */
+  {type:'5', badge:'bdg-gold', badgeLabel:'Мультибаннер',
+   title:'Silent Underflow',
+   tags:[{l:'★★★★★',c:''}],
+   img:F+'Silent%20Underflow/cover.png',
+   desc:'За окном моросит дождь, а я погружаюсь в бурный поток вместе с моим Зейном — божественным и принадлежащим лишь мне.',
+   link:'https://teletype.in/@snowfox_lnd/silentunderflow'},
+
   {type:'5', badge:'bdg-gold', badgeLabel:'Соло Баннер',
    title:'Medical Rescue',
    tags:[{l:'★★★★★',c:''}],
