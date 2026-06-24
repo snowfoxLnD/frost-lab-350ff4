@@ -19,7 +19,7 @@ const FOLDERS=[
 const PROFILE={
   anketa:[
     ['Полное имя','Zayne · 黎深 · Lí Shēn'],
-    ['День рождения','5 сентября (Дева)'],
+    ['День рождения','5 сентября'],
     ['Возраст','27 (родился 5.09.2021)'],
     ['Рост','≈ 187 см'],
     ['Цвет глаз','ореховый зелёный'],
@@ -42,43 +42,41 @@ const PROFILE={
     ['Публикации','30+ статей первым автором в журналах с IF&nbsp;&gt;&nbsp;9.0'],
     ['Первая в мире операция','Регенерация аортального клапана с применением Эвола'],
     ['Специализации','Коррекция врождённых пороков сердца · регенерация и восстановление клапанов · трансплантация сердца'],
+    ['Препараты в практике','Регулярно работает с антиагрегантами — клопидогрель в центре кардиопротокола'],
     ['Стиль работы','Хирург-перфекционист, минимальная ошибочность, известен дотошностью'],
   ],
   bio:[
-    ['Семья','Оба родителя — врачи Всемирной Ассоциации Врачей'],
-    ['Детство','Часто оставался один — родители в долгих международных командировках'],
+    ['Семья','Оба родителя — врачи Всемирной Ассоциации Врачей; работают в долгих международных командировках'],
+    ['Ритуал на ДР','Каждый год шлёт родителям видео-сообщение, что у него всё в порядке'],
+    ['Детство','Чаще всего был один — родителей рядом почти не было'],
     ['MC','Знакомы с детства, дружба прервалась когда Зейн уехал'],
     ['Воссоединение','Через 10+ лет — стал её лечащим врачом по просьбе бабушки Жозефины'],
     ['Калеб','Друг с детских лет, общая компания'],
     ['Доктор Ноа','Бывший профессор и научный руководитель, продолжают совместные исследования'],
-    ['Картер','Однокурсник, соперник по университету — ушёл в усиление через Протокор'],
-    ['Уильям','Друг, погибший на горе Этернал; Зейн был вынужден остановить его при необратимой трансформации в скитальца'],
+    ['Картер','Однокурсник, идейный соперник — ушёл в Protocore Enhancement'],
+    ['Уильям','Друг, погибший на горе Вечной; Зейн был вынужден остановить его при необратимой трансформации в Странника'],
     ['Кошмары','С 12 лет — повторяющиеся сны; видит мир глазами альтер-эго'],
-    ['Даунбрейкер','Тёмная версия Зейна из снов; в его реальности скитальцы заполнили улицы'],
-    ['Ритуал на ДР','Каждый год шлёт родителям видео-сообщение: «У меня всё хорошо»'],
+    ['Даунбрейкер','Тёмная версия Зейна из этих снов. В его реальности Странники заполнили улицы, люди заперты в домах; он живёт один в холодной, тихой, погибающей версии Линкона. Для нашего Зейна — постоянное напоминание о том, что может случиться, если он не успеет'],
   ],
   habits:[
-    ['Сладкое','Тайно любит, особенно горячее какао'],
+    ['Сладкое','Тайно любит'],
     ['Алкоголь','Не пьёт — одной конфеты с ликёром достаточно, чтобы опьянеть'],
-    ['Когда болеет','Отказывается от лекарств, требует горячее какао'],
-    ['Бильярд','Играет отлично, учитель строгий'],
-    ['Резьба по нефриту','Освоил мастерски — благодаря работе с Протокором'],
-    ['Молочный чай','Тайком ходил с медперсоналом Аксо за заказом'],
-    ['Косы','Научился плести, ухаживая за детьми в больнице'],
     ['Темп','Трудоголик, часто закрывает смену под утро'],
     ['Эвол в действии','При активации температура вокруг падает до экстремально низкой'],
-    ['Соло-режим','Любит путешествия, музеи, парки и спорт в одиночестве'],
+    ['Чем занимается','Бильярд, резьба по нефриту, путешествия, музеи, парки, спорт — обычно один'],
     ['Чувство юмора','Серьёзным лицом — самые несерьёзные вещи; забавляется, наблюдая реакцию'],
     ['Маленькие животные','Слабость, хотя сам бы не признался'],
+    ['Свободное время','Любит проводить наедине с собой — без шума, без компании'],
   ],
   people:[
     ['MC','Главный человек в жизни. Друг детства, лечащая пациентка, пара'],
+    ['Пай','Маленький компаньон-ягнёнок — присутствие, которое не задаёт вопросов'],
     ['Калеб','Друг с детства, общая компания, регулярный контакт'],
     ['Доктор Ноа','Учитель и научный соавтор'],
     ['Грейсон','Коллега по Аксо, медицинский персонал'],
     ['Ивонн','Коллега по Аксо, медицинский персонал'],
     ['Картер','Бывший однокурсник, идейный противник'],
-    ['Уильям','Утраченный друг с горы Этернал'],
+    ['Уильям','Утраченный друг с горы Вечной'],
     ['Родители','Работают вдали, видятся редко, переписка — видео-сообщения'],
     ['Бабушка Жозефина','Бабушка MC; именно её просьба свела их с MC снова'],
     ['Голос JP','Takuya Satou'],
@@ -87,14 +85,12 @@ const PROFILE={
 };
 
 
-/* ──────────────  CSS  ──────────────
-   Используем переменные темы (--ice, --cop, --bdr, ...) — меняется по сезону. */
+/* ──────────────  CSS  ────────────── */
 
 const css=`
 #tab-profile{padding:24px 0 60px;}
 .pr-wrap{position:relative;}
 
-/* шапка как «вход в кабинет» */
 .pr-hdr{position:relative;text-align:center;padding:16px 14px 22px;border:1px solid var(--bdr);
   background:linear-gradient(180deg,color-mix(in srgb,var(--ice) 6%,transparent),transparent 70%),rgba(0,0,0,.18);
   margin-bottom:18px;overflow:hidden;}
@@ -111,11 +107,9 @@ const css=`
 .pr-hdr .pr-stamp b{font-size:.55rem;letter-spacing:.2em;}
 @media(max-width:640px){.pr-hdr .pr-stamp{position:static;margin:8px auto 0;}}
 
-/* основная сетка: папки слева, лист справа */
 .pr-grid{display:grid;grid-template-columns:240px 1fr;gap:18px;align-items:start;}
 @media(max-width:760px){.pr-grid{grid-template-columns:1fr;}}
 
-/* папки картотеки */
 .pr-tabs{display:flex;flex-direction:column;gap:6px;}
 @media(max-width:760px){
   .pr-tabs{flex-direction:row;flex-wrap:wrap;gap:6px;overflow-x:auto;padding-bottom:4px;}
@@ -133,14 +127,14 @@ const css=`
   .pr-tab.on{border-left-color:var(--bdr);border-top-color:var(--ice);}
   .pr-tab.on::after{right:50%;top:auto;bottom:-1px;transform:translateX(50%);}
 }
-.pr-tab-ic{width:32px;height:32px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
-  background:rgba(0,0,0,.3);border:1px solid var(--bdr);font-size:1.05rem;}
-.pr-tab-ic img{width:24px;height:24px;object-fit:contain;image-rendering:pixelated;image-rendering:crisp-edges;display:block;}
+.pr-tab-ic{width:40px;height:40px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  background:transparent;font-size:1.15rem;}
+.pr-tab-ic img{width:36px;height:36px;object-fit:contain;image-rendering:pixelated;image-rendering:crisp-edges;display:block;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.35));}
 .pr-tab-txt{display:flex;flex-direction:column;line-height:1.15;}
 .pr-tab-title{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;}
 .pr-tab-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.78rem;color:var(--mut);}
 
-/* лист содержимого */
 .pr-sheet{position:relative;background:var(--card-bg,rgba(8,14,24,.6));border:1px solid var(--bdr);
   padding:22px 24px 26px;min-height:340px;
   -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
@@ -152,7 +146,6 @@ const css=`
 .pr-sheet-h{font-family:'Playfair Display',Georgia,serif;font-size:1.45rem;color:var(--ice);margin:0;letter-spacing:.01em;}
 .pr-sheet-meta{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.22em;color:var(--mut);text-transform:uppercase;}
 
-/* поля dl */
 .pr-fields{margin:0;}
 .pr-row{display:grid;grid-template-columns:200px 1fr;gap:10px 18px;padding:8px 0;border-bottom:1px dotted color-mix(in srgb,var(--bdr) 60%,transparent);font-size:.96rem;align-items:baseline;}
 .pr-row:last-child{border:none;}
@@ -163,7 +156,6 @@ const css=`
   .pr-row dt{font-size:.5rem;}
 }
 
-/* подпись внизу листа — почерком */
 .pr-sign{margin-top:20px;text-align:right;font-family:'Cormorant Garamond',serif;font-style:italic;
   color:var(--mut);font-size:.92rem;letter-spacing:.02em;}
 .pr-sign::before{content:'— ';color:var(--cop);}
@@ -228,11 +220,9 @@ function render(){
         <div class="pr-sheet-wrap">${renderSheet()}</div>
       </div>
     </div>`;
-  // переключение по клику
   host.querySelectorAll('.pr-tab').forEach(btn=>{
     btn.addEventListener('click',()=>{
       _active=btn.dataset.prId;
-      // мягко обновим
       host.querySelectorAll('.pr-tab').forEach(b=>b.classList.toggle('on',b.dataset.prId===_active));
       const wrap=host.querySelector('.pr-sheet-wrap');
       if(wrap)wrap.innerHTML=renderSheet();
@@ -250,7 +240,6 @@ function injectStyle(){
 function ensureNavBtn(){
   if(document.getElementById('pr-navbtn'))return;
   const menu=document.querySelector('.nav-menu');if(!menu)return;
-  // вставим перед «Досье»
   const dossier=Array.from(menu.querySelectorAll('button.nav-link')).find(b=>b.textContent.trim().toLowerCase().startsWith('досье'));
   const btn=document.createElement('button');
   btn.className='nav-link';btn.id='pr-navbtn';btn.textContent='О персонаже';
