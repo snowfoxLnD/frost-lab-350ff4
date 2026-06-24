@@ -134,7 +134,7 @@ const ZAYNE_CARDS_5={
     ['2024-06-07','Snowfall Embrace','Trace Of Divinity · Solar'],
     ['2024-06-07','Snowfall Encounter','Trace Of Divinity · Solar'],
     ['2024-06-25','Snowy Serenity','Entwined Shadows'],
-    ['2024-08-07','— (Misty Invasion)','Misty Invasion · ивент'],
+    ['2024-08-07','Misty Invasion','Misty Invasion · ивент'],
     ['2024-09-07','Eternal Attachment','Destined Reunion'],
     ['2024-09-23','Moonlit Dream','Wander In Wonder'],
     ['2024-09-30','Frozen Nightfall','Chansia Journey'],
