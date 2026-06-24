@@ -115,12 +115,14 @@ body.theme-light{color-scheme:light;}
 #themeToggle:hover{border-color:var(--ice);box-shadow:0 0 14px color-mix(in srgb,var(--ice) 35%,transparent);}
 @media(max-width:980px){#themeToggle{top:8px;right:10px;width:32px;height:32px;font-size:.9rem;}}
 /* season selector in dossier */
-.ds-season{display:flex;gap:8px;flex-wrap:wrap;align-items:center;border:1px solid var(--bdr);background:rgba(0,0,0,.12);padding:12px 14px;margin-bottom:18px;}
+#themeToggle{display:none!important;}
+.ds-season{display:flex;flex-direction:column;gap:10px;border:1px solid var(--bdr);background:rgba(0,0,0,.12);padding:12px 14px;margin-bottom:18px;}
+.ds-season-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
 .ds-season .lbl{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--icdim);width:100%;}
 .ds-season button{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.06em;color:var(--txt);border:1px solid var(--bdr);background:transparent;padding:8px 12px;cursor:pointer;transition:.25s;border-radius:3px;}
 .ds-season button:hover{border-color:var(--ice);}
 .ds-season button.on{background:color-mix(in srgb,var(--ice) 16%,transparent);border-color:var(--ice);color:var(--ice);}
-.ds-season .auto-btn{margin-left:auto;}
+.ds-season .auto-season-btn,.ds-season .auto-mode-btn{margin-left:auto;}
 
 /* ---------- WEATHER (голографические часы охотника) ---------- */
 .wx{position:relative;border:1px solid color-mix(in srgb,var(--ice) 35%,transparent);background:linear-gradient(135deg,color-mix(in srgb,var(--ice) 9%,transparent),transparent 70%),rgba(6,14,26,.35);
@@ -152,12 +154,21 @@ const st=document.createElement('style');st.textContent=css;document.head.append
 /* ---------- ПРИМЕНЕНИЕ ТЕМЫ ---------- */
 function curState(){
   let s=null;try{s=JSON.parse(localStorage.getItem('akso_theme')||'null');}catch(e){}
-  if(s&&s.season&&s.mode&&!s.auto)return s;
-  // auto
+  // legacy migration: старая схема использовала s.auto={true|false} для обоих
+  if(s&&'auto' in s){
+    if(s.seasonAuto===undefined)s.seasonAuto=s.auto;
+    if(s.modeAuto===undefined)s.modeAuto=s.auto;
+  }
   const m=new Date().getMonth(),h=new Date().getHours();
-  const season=(m>=2&&m<=4)?'spring':(m>=5&&m<=7)?'summer':(m>=8&&m<=10)?'autumn':'winter';
-  const mode=(h>=7&&h<19)?'day':'night';
-  return {season,mode,auto:(s?s.auto!==false:true)};
+  const autoSeason=(m>=2&&m<=4)?'spring':(m>=5&&m<=7)?'summer':(m>=8&&m<=10)?'autumn':'winter';
+  const autoMode=(h>=7&&h<19)?'day':'night';
+  if(!s)return {season:autoSeason,mode:autoMode,seasonAuto:true,modeAuto:true};
+  return {
+    season:s.seasonAuto?autoSeason:(s.season||autoSeason),
+    mode:s.modeAuto?autoMode:(s.mode||autoMode),
+    seasonAuto:!!s.seasonAuto,
+    modeAuto:!!s.modeAuto,
+  };
 }
 function save(s){try{localStorage.setItem('akso_theme',JSON.stringify(s));}catch(e){}}
 function applyTheme(){
@@ -171,17 +182,22 @@ function applyTheme(){
   document.body.setAttribute('data-theme',key);
   document.body.classList.toggle('theme-light',false);
   document.body.classList.toggle('theme-dark',true);
-  // update toggle icon
-  const tg=document.getElementById('themeToggle');if(tg)tg.textContent=(s.mode==='day'?'🌙':'☀');
   // update season buttons
-  document.querySelectorAll('.ds-season [data-season]').forEach(b=>b.classList.toggle('on',b.dataset.season===s.season));
-  const ab=document.querySelector('.ds-season .auto-btn');if(ab)ab.classList.toggle('on',!!s.auto);
-  // refresh weather (depends on season tint)
+  document.querySelectorAll('.ds-season [data-season]').forEach(b=>b.classList.toggle('on',!s.seasonAuto&&b.dataset.season===s.season));
+  const sab=document.querySelector('.ds-season .auto-season-btn');if(sab)sab.classList.toggle('on',!!s.seasonAuto);
+  // update mode buttons
+  document.querySelectorAll('.ds-season [data-mode]').forEach(b=>b.classList.toggle('on',!s.modeAuto&&b.dataset.mode===s.mode));
+  const mab=document.querySelector('.ds-season .auto-mode-btn');if(mab)mab.classList.toggle('on',!!s.modeAuto);
+  // refresh weather
   renderWeather();
 }
-function toggleMode(){const s=curState();s.mode=(s.mode==='day'?'night':'day');s.auto=false;save(s);applyTheme();}
-function setSeason(season){const s=curState();s.season=season;s.auto=false;save(s);applyTheme();}
-function setAuto(){save({auto:true});applyTheme();}
+function setMode(mode){let s=null;try{s=JSON.parse(localStorage.getItem('akso_theme')||'null');}catch(e){}s=s||{};s.mode=mode;s.modeAuto=false;delete s.auto;save(s);applyTheme();}
+function setModeAuto(){let s=null;try{s=JSON.parse(localStorage.getItem('akso_theme')||'null');}catch(e){}s=s||{};s.modeAuto=true;delete s.auto;save(s);applyTheme();}
+function setSeason(season){let s=null;try{s=JSON.parse(localStorage.getItem('akso_theme')||'null');}catch(e){}s=s||{};s.season=season;s.seasonAuto=false;delete s.auto;save(s);applyTheme();}
+function setSeasonAuto(){let s=null;try{s=JSON.parse(localStorage.getItem('akso_theme')||'null');}catch(e){}s=s||{};s.seasonAuto=true;delete s.auto;save(s);applyTheme();}
+// legacy aliases
+function toggleMode(){const s=curState();setMode(s.mode==='day'?'night':'day');}
+function setAuto(){setSeasonAuto();setModeAuto();}
 
 /* ---------- ПОГОДА (детерминированно по дате — у всех одинаково) ---------- */
 function seedFromDate(d){const k=d.getFullYear()*1000+ (Math.floor((d-new Date(d.getFullYear(),0,0))/864e5)); // day-of-year
@@ -353,27 +369,33 @@ function renderWeather(){
 
 /* ---------- МОНТАЖ ЭЛЕМЕНТОВ ---------- */
 function mount(){
-  // 1) floating day/night toggle (fixed, does not affect nav layout)
-  if(!document.getElementById('themeToggle')){
-    const b=document.createElement('button');b.id='themeToggle';b.title='День / ночь';b.onclick=toggleMode;
-    document.body.appendChild(b);
-  }
-  // 2) season selector + weather widget in dossier
+  // 2) season+mode selector + weather widget in dossier
   const wrap=document.querySelector('#tab-dossier .ds-wrap');
   if(wrap&&!document.getElementById('wxWidget')){
     const wx=document.createElement('div');wx.className='wx';wx.id='wxWidget';
     const sel=document.createElement('div');sel.className='ds-season';
-    sel.innerHTML='<span class="lbl">Сезон оформления</span>'+
-      SEASONS.map(([k,n])=>`<button data-season="${k}" onclick="aksoTheme.setSeason('${k}')">${n}</button>`).join('')+
-      '<button class="auto-btn" onclick="aksoTheme.setAuto()">⏱ Авто</button>';
+    sel.innerHTML=
+      '<div class="ds-season-row">'
+      +'<span class="lbl">Сезон оформления</span>'
+      +SEASONS.map(([k,n])=>`<button data-season="${k}" onclick="aksoTheme.setSeason('${k}')">${n}</button>`).join('')
+      +'<button class="auto-season-btn" onclick="aksoTheme.setSeasonAuto()">⏱ Авто сезон</button>'
+      +'</div>'
+      +'<div class="ds-season-row">'
+      +'<span class="lbl">Смена</span>'
+      +'<button data-mode="day" onclick="aksoTheme.setMode(\'day\')">🌤 Дневная смена</button>'
+      +'<button data-mode="night" onclick="aksoTheme.setMode(\'night\')">🌙 Ночная смена</button>'
+      +'<button class="auto-mode-btn" onclick="aksoTheme.setModeAuto()">⏱ Авто</button>'
+      +'</div>';
     const head=wrap.querySelector('.ds-head');
     if(head){head.insertAdjacentElement('afterend',sel);sel.insertAdjacentElement('afterend',wx);}
     else{wrap.insertBefore(wx,wrap.firstChild);wrap.insertBefore(sel,wrap.firstChild);}
   }
+  // remove legacy floating button if present from earlier sessions
+  const stale=document.getElementById('themeToggle');if(stale)stale.remove();
   applyTheme();
 }
 
-window.aksoTheme={setSeason,setAuto,toggleMode,applyTheme};
+window.aksoTheme={setSeason,setSeasonAuto,setMode,setModeAuto,setAuto,toggleMode,applyTheme};
 // apply palette ASAP (before mount, to avoid flash), then mount UI when DOM ready
 applyTheme();
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
