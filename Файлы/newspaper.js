@@ -246,16 +246,42 @@ const css=`
 
 /* итог */
 .nws-foot{margin-top:24px;padding-top:14px;border-top:1px solid var(--nws-line);text-align:center;font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.3em;color:var(--nws-text-dim);text-transform:uppercase;}
+.nws-read-btn{display:inline-block;padding:9px 18px;background:rgba(0,0,0,.3);border:1px solid var(--nws-amber-soft);
+  color:var(--nws-paper);font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.22em;
+  text-transform:uppercase;cursor:pointer;transition:background .2s,border-color .2s,color .2s;}
+.nws-read-btn:hover{background:color-mix(in srgb,var(--nws-amber) 16%,rgba(0,0,0,.3));border-color:var(--nws-amber);color:var(--nws-paper);}
+.nws-read-mark{display:inline-block;padding:9px 18px;border:1px dashed color-mix(in srgb,var(--nws-amber) 50%,transparent);
+  color:var(--nws-amber);font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;}
+.nws-foot-tag{margin-top:10px;font-size:.5rem;}
 `;
 
 
 /* ──────────────  УТИЛИТЫ  ────────────── */
 
-function seedFromDate(d){
-  const k=d.getFullYear()*1000+Math.floor((d-new Date(d.getFullYear(),0,0))/864e5);
-  let x=(k*9301+49297)%233280;
+/* ────────  УТИЛИТЫ  ──────── */
+
+// ISO-номер недели: понедельник как день 1
+function isoWeek(d){
+  const t=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));
+  const day=t.getUTCDay()||7;
+  t.setUTCDate(t.getUTCDate()+4-day);
+  const yStart=new Date(Date.UTC(t.getUTCFullYear(),0,1));
+  return {week:Math.ceil(((t-yStart)/864e5+1)/7), year:t.getUTCFullYear()};
+}
+// диапазон недели: понедельник — воскресенье
+function weekRange(d){
+  const day=d.getDay()||7;
+  const mon=new Date(d);mon.setDate(d.getDate()-(day-1));
+  const sun=new Date(mon);sun.setDate(mon.getDate()+6);
+  return [mon,sun];
+}
+// seed одной недели — стабильный pseudo-rng
+function seedFromWeek(d){
+  const w=isoWeek(d);
+  let x=(w.year*100+w.week)*9301+49297;x%=233280;
   return ()=>{x=(x*9301+49297)%233280;return x/233280;};
 }
+function seedFromDate(d){return seedFromWeek(d);} // legacy alias
 function pickN(arr,n,rng){
   const a=arr.slice();
   const out=[];
@@ -280,9 +306,16 @@ function render(){
   const chronicle=pickN(HEADLINES.filter(h=>h!==lead),5,rng);
   const searches=pickN(ZAYNE_SEARCHES,6,rng);
 
-  const dateStr=d.toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'});
-  const issueNo='№ '+(Math.floor((d-new Date(d.getFullYear(),0,0))/864e5)+1).toString().padStart(3,'0');
-  const dow=['ВОСКРЕСЕНЬЕ','ПОНЕДЕЛЬНИК','ВТОРНИК','СРЕДА','ЧЕТВЕРГ','ПЯТНИЦА','СУББОТА'][d.getDay()];
+  const [mon,sun]=weekRange(d);
+  const w=isoWeek(d);
+  const sameMonth=mon.getMonth()===sun.getMonth();
+  const fmt=(x,opt)=>x.toLocaleDateString('ru-RU',opt);
+  const dateStr=sameMonth
+    ? `${mon.getDate()}–${sun.getDate()} ${fmt(sun,{month:'long',year:'numeric'})}`
+    : `${fmt(mon,{day:'numeric',month:'long'})} — ${fmt(sun,{day:'numeric',month:'long',year:'numeric'})}`;
+  const issueNo='№ '+String(w.week).padStart(2,'0')+' · '+w.year;
+  const weekKey=`${w.year}-W${String(w.week).padStart(2,'0')}`;
+  const isRead=Array.isArray((window.DS||{}).newspaperReads)&&window.DS.newspaperReads.includes(weekKey);
 
   // архив карт по годам
   const archiveHTML=(rarity,dict)=>{
@@ -307,7 +340,7 @@ function render(){
         <div class="nws-pre">L · I · N · K · O · N · C · I · T · Y</div>
         <h1 class="nws-title">THE LINKON <em>TIMES</em></h1>
         <div class="nws-meta">
-          <span>${dow} · ${esc(dateStr)}</span>
+          <span>Неделя · ${esc(dateStr)}</span>
           <span>Выпуск ${esc(issueNo)}</span>
           <span>Цена · бесплатно</span>
         </div>
@@ -349,7 +382,12 @@ function render(){
       </details>
 
 
-      <div class="nws-foot">— конец выпуска · The Linkon Times · собрано для Архива Аксо —</div>
+      <div class="nws-foot">
+        ${isRead
+          ? '<span class="nws-read-mark">✓ выпуск прочитан · отметка стоит</span>'
+          : `<button class="nws-read-btn" type="button" onclick="window.__nwsMarkRead&&window.__nwsMarkRead('${weekKey}')">Прочитано · поставить отметку</button>`}
+        <div class="nws-foot-tag">— The Linkon Times · собрано для Архива Аксо —</div>
+      </div>
     </div>`;
 }
 
@@ -419,6 +457,17 @@ function mount(){
   patchNavGoForNewspaper();
   render();
 }
+
+// сохранить недельную отметку в досье + проверить ачивку
+window.__nwsMarkRead=function(weekKey){
+  if(!window.DS)return;
+  if(!Array.isArray(window.DS.newspaperReads))window.DS.newspaperReads=[];
+  if(window.DS.newspaperReads.includes(weekKey))return;
+  window.DS.newspaperReads.push(weekKey);
+  if(typeof window.dsSave==='function')window.dsSave();
+  if(window.DS.newspaperReads.length>=10 && typeof window.dsUnlock==='function')window.dsUnlock('news10');
+  render();
+};
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);
 else mount();
