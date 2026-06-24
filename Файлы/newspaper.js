@@ -326,7 +326,7 @@ function render(){
         <h4 class="nws-yr-head">${yr}<span class="cnt">${rarity} · ${items.length} карт</span></h4>
         ${items.map(([dt,name,banner])=>`
           <div class="nws-card-row">
-            <div class="nws-card-date">${dt.slice(5)}</div>
+            <div class="nws-card-date">${dt.slice(8,10)}.${dt.slice(5,7)}</div>
             <div class="nws-card-name">${esc(name)}</div>
             <div class="nws-card-banner">${esc(banner)}</div>
           </div>`).join('')}
