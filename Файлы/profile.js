@@ -79,8 +79,8 @@ const PROFILE={
     ['Уильям','Утраченный друг с горы Вечной'],
     ['Родители','Работают вдали, видятся редко, переписка — видео-сообщения'],
     ['Бабушка Жозефина','Бабушка MC; именно её просьба свела их с MC снова'],
-    ['Голос JP','Takuya Satou'],
-    ['Голос EN','Strife (с 2026)'],
+    ['Голос JP','Junta Terashima (с июня 2026; с запуска 2024 — Takuya Satō)'],
+    ['Голос EN','под NDA — официально не раскрывается'],
   ],
 };
 
@@ -131,6 +131,7 @@ const css=`
   background:transparent;font-size:1.15rem;}
 .pr-tab-ic img{width:36px;height:36px;object-fit:contain;image-rendering:pixelated;image-rendering:crisp-edges;display:block;
   filter:drop-shadow(0 2px 4px rgba(0,0,0,.35));}
+.pr-tab[data-pr-id="bio"] .pr-tab-ic img{width:42px;height:42px;}
 .pr-tab-txt{display:flex;flex-direction:column;line-height:1.15;}
 .pr-tab-title{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;}
 .pr-tab-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.78rem;color:var(--mut);}
